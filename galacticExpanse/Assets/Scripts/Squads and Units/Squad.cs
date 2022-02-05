@@ -12,17 +12,20 @@ public class Squad : MonoBehaviour
 
     #endregion
 
-    // Start is called before the first frame update
-    void Start()
+    #region Properties
+
+    public int NumUnits
     {
-        
+        get { return numUnits; }
+        set { numUnits = value; }
     }
 
-    // Update is called once per frame
-    void Update()
+    public Vector2 TargetLocation
     {
-        
+        set { targetLocation = value; }
     }
+
+    #endregion
 
     public void UpdateSquad()
     {

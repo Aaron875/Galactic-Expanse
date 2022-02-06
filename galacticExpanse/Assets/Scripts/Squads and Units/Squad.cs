@@ -23,12 +23,14 @@ public class Squad : MonoBehaviour
     public Vector2 TargetLocation
     {
         set { targetLocation = value; }
+        get { return targetLocation; }
     }
 
     #endregion
 
     public void UpdateSquad()
     {
+        Debug.Log("Updating position...");
         transform.position = Vector2.MoveTowards(transform.position, targetLocation, Time.deltaTime * speed);
     }
 }

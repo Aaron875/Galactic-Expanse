@@ -267,6 +267,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &609258758 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1924114784016713779, guid: cbf7c8a4c3128094b83723edfc7285d7, type: 3}
+  m_PrefabInstance: {fileID: 1515238491}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &652772716 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1924114784016713780, guid: cbf7c8a4c3128094b83723edfc7285d7, type: 3}
@@ -366,6 +371,7 @@ GameObject:
   - component: {fileID: 1396897482}
   - component: {fileID: 1396897483}
   - component: {fileID: 1396897484}
+  - component: {fileID: 1396897485}
   m_Layer: 5
   m_Name: DragObject
   m_TagString: Untagged
@@ -455,6 +461,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98043a9eeb8123a498bb4789a1742fb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  base1: {fileID: 1396897481}
+--- !u!114 &1396897485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396897481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da41d90ee5fe9a14596b08a422a6ae56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  squadPrefab: {fileID: 8472905053875474509, guid: 34066cee67f642246abd03b4a79d1a45, type: 3}
+  playerSquads:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  enemySquads: []
+  distanceToAttack: 0
+  targetTower: {fileID: 609258758}
 --- !u!1001 &1515238491
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -509,6 +543,18 @@ PrefabInstance:
     - target: {fileID: 1924114784016713780, guid: cbf7c8a4c3128094b83723edfc7285d7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924114784016713781, guid: cbf7c8a4c3128094b83723edfc7285d7, type: 3}
+      propertyPath: m_Color.b
+      value: 0.17986828
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924114784016713781, guid: cbf7c8a4c3128094b83723edfc7285d7, type: 3}
+      propertyPath: m_Color.g
+      value: 0.17986828
+      objectReference: {fileID: 0}
+    - target: {fileID: 1924114784016713781, guid: cbf7c8a4c3128094b83723edfc7285d7, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8867924
       objectReference: {fileID: 0}
     - target: {fileID: 1924114784016713781, guid: cbf7c8a4c3128094b83723edfc7285d7, type: 3}
       propertyPath: m_SortingOrder

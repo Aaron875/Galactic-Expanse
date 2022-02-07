@@ -7,23 +7,23 @@ public class GameManager : MonoBehaviour
     public List<Base> bases; //All the bases
     public GameObject pStart; //Player Start
     public GameObject eStart; //Enemy Start
-    private int updateTime; //Used for incrementing unit counts
+    private float timer; //Used for incrementing unit counts
 
     // Start is called before the first frame update
     void Start()
     {
-        updateTime = 0;
+        timer = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        updateTime++;
+        timer += Time.deltaTime;
 
-        if(updateTime >= 600)
+        if(timer >= 4)
         {
             UpdateBases();
-            updateTime = 0;
+            timer = 0;
         }
     }
 

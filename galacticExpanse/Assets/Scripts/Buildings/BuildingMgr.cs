@@ -8,6 +8,12 @@ public class BuildingMgr : MonoBehaviour
     [SerializeField] private Sprite playerSprite;
     [SerializeField] private Sprite enemySprite;
     [SerializeField] private List<Building> buildings;
+
+    public List<Building> Buildings
+    {
+        get { return buildings; }
+    }
+
     // Start is called before the first frame update
     void Start()
     {

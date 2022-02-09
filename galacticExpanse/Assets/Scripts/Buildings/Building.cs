@@ -7,6 +7,7 @@ public class Building : MonoBehaviour
     [SerializeField] private int numUnits;
     [SerializeField] private string alignment;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private string type;
 
     public int NumUnits
     {
@@ -18,6 +19,11 @@ public class Building : MonoBehaviour
     {
         get { return alignment; }
         set { alignment = value; }
+    }
+
+    public string Type
+    {
+        get { return type; }
     }
 
     public SpriteRenderer SpriteRenderer

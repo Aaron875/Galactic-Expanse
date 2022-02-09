@@ -76,14 +76,14 @@ public class InputManager : MonoBehaviour
 
 
         // Bottom-right
-        if (!Input.GetMouseButton(0) &&
-            base1.transform.position.x + 5 <= base2.transform.position.x + 5 &&
-            base1.transform.position.y - 5 >= base2.transform.position.y - 5)
-        {
-            Debug.Log("Bottom-right Hit Detected");
-            base1.transform.position = base1Pos;
-        
-        }
+        //if (!Input.GetMouseButton(0) &&
+        //    base1.transform.position.x + 5 <= base2.transform.position.x + 5 &&
+        //    base1.transform.position.y - 5 >= base2.transform.position.y - 5)
+        //{
+        //    Debug.Log("Bottom-right Hit Detected");
+        //    base1.transform.position = base1Pos;
+        //
+        //}
     }
 
 }

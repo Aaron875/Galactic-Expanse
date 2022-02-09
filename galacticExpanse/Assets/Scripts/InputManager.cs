@@ -31,43 +31,48 @@ public class InputManager : MonoBehaviour
             Vector3 mouse = Input.mousePosition;
             base1.transform.position = mouse; // Sets the clicked object's position  to the mouse's position
             //Debug.Log(base1.gameObject); // for testing
+
+           
         }
 
         HitDetection();
     }
 
+    /// <summary>
+    /// NEED RAYCASTING WORKING FIRST
+    /// </summary>
     private void HitDetection() 
     {
-        // Top-right
-        if (!Input.GetMouseButton(0) &&
-            base1.transform.position.x + 5 <= base2.transform.position.x + 5 &&
-            base1.transform.position.y + 5 <= base2.transform.position.y + 5)
-        {
-            Debug.Log("Top-Right Hit Detected");
-            base1.transform.position = base1Pos;
+        // Bottom-right
+        //if (!Input.GetMouseButton(0) &&
+        //    base1.transform.position.x + 5 <= base2.transform.position.x + 5 &&
+        //    base1.transform.position.y + 5 <= base2.transform.position.y + 5)
+        //{
+        //    Debug.Log("Bottom-Right Hit Detected");
+        //    base1.transform.position = base1Pos;
+        //
+        //}
 
-        }
 
+        // Top-left ---BROKEN
+        // if (!Input.GetMouseButton(0) &&
+        //     base1.transform.position.x - 5 >= base2.transform.position.x - 5 &&
+        //     base1.transform.position.y + 5 <= base2.transform.position.y + 5)
+        // {
+        //     Debug.Log("Top-left Hit Detected");
+        //     base1.transform.position = base1Pos;
+        // 
+        // }
 
-        // Top-left
-        if (!Input.GetMouseButton(0) &&
-            base1.transform.position.x - 5 >= base2.transform.position.x - 5 &&
-            base1.transform.position.y + 5 <= base2.transform.position.y + 5)
-        {
-            Debug.Log("Top-left Hit Detected");
-            base1.transform.position = base1Pos;
-
-        }
-
-        // Bottom-left
-        if (!Input.GetMouseButton(0) &&
-            base1.transform.position.x - 5 >= base2.transform.position.x - 5 &&
-            base1.transform.position.y - 5 >= base2.transform.position.y - 5)
-        {
-            Debug.Log("Bottom-left Hit Detected");
-            base1.transform.position = base1Pos;
-
-        }
+        // Bottom-left --- BROKEN
+        //if (!Input.GetMouseButton(0) &&
+        //    base1.transform.position.x - 1 >= base2.transform.position.x - 1 &&
+        //    base1.transform.position.y - 1 >= base2.transform.position.y - 1)
+        //{
+        //    Debug.Log("Bottom-left Hit Detected");
+        //    base1.transform.position = base1Pos;
+        //
+        //}
 
 
         // Bottom-right
@@ -77,7 +82,7 @@ public class InputManager : MonoBehaviour
         {
             Debug.Log("Bottom-right Hit Detected");
             base1.transform.position = base1Pos;
-
+        
         }
     }
 

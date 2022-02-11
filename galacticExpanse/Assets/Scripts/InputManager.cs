@@ -7,6 +7,9 @@ public class InputManager : MonoBehaviour
     public LayerMask draggableMask;
     GameObject selectedObject;
     bool isDragging;
+    [SerializeField] GameObject[] enemyBuildings;
+    Vector3 pos;
+    Vector3 originPos;
 
     void Start()
     {
@@ -22,19 +25,22 @@ public class InputManager : MonoBehaviour
             {
                 //Debug.Log(hit.collider.gameObject.name);
                 selectedObject = hit.collider.gameObject;
+                originPos = selectedObject.transform.position;
                 isDragging = true;
+                 
             }
         }
 
         if (isDragging)
         {
-            Vector3 pos = mousePos();
+            pos = mousePos();
             selectedObject.transform.position = pos;
         }
 
         if (Input.GetMouseButtonUp(0))
         {
             isDragging = false;
+            selectedObject.transform.position = originPos;
         }
     }
 
@@ -43,4 +49,16 @@ public class InputManager : MonoBehaviour
         return Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
     }
 
+
+    public void HitDetection()
+    {
+        for(int i = 0; i < enemyBuildings.Length; i++)
+        {
+            if (enemyBuildings[i].transform.position == pos)
+            {
+                Debug.Log("hit detected");
+            }
+        }
+
+    }
 }

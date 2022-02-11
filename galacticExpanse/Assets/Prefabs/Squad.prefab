@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 8472905053875474509}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.12, y: 1.06, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 20, y: 20, z: 1}
   m_Children:
   - {fileID: 8472905054527720828}
   - {fileID: 8472905054434279534}
@@ -100,7 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numUnits: 0
   speed: 2
-  targetLocation: {x: 0, y: 0}
+  targetLocation: {fileID: 0}
+  team: 
 --- !u!1 &8472905054332447693
 GameObject:
   m_ObjectHideFlags: 0

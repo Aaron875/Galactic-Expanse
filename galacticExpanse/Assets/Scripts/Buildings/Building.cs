@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Building : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Building : MonoBehaviour
     [SerializeField] private string alignment;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private string type;
+    [SerializeField] private Text unitText;
     private string displayUnits;
 
     public int NumUnits
@@ -40,6 +42,13 @@ public class Building : MonoBehaviour
     void Start()
     {
         displayUnits = numUnits.ToString();
+        unitText.text = displayUnits;
+    }
+
+    void Update()
+    {
+        displayUnits = numUnits.ToString();
+        unitText.text = displayUnits;
     }
 
     public void damageBuilding (int squadUnits, string squadAlignment )

@@ -39,7 +39,10 @@ public class InputManager : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             isDragging = false;
-            selectedObject.transform.position = originPos;
+            if (selectedObject != null)
+            {
+                selectedObject.transform.position = originPos;
+            }
         }
     }
 

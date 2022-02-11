@@ -43,7 +43,7 @@ public class SquadManager : MonoBehaviour
     private void Update()
     {
         // Debug spawing squads
-        if(Input.GetMouseButtonDown(0))
+/*        if(Input.GetMouseButtonDown(0))
         {
             CreateSquad(0, 0, 5, Camera.main.ScreenToWorldPoint(Input.mousePosition), targetTower.transform.position);
         }
@@ -51,7 +51,7 @@ public class SquadManager : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             CreateSquad(1, 0, 5, Camera.main.ScreenToWorldPoint(Input.mousePosition), targetTower.transform.position);
-        }
+        }*/
 
         UpdateSquads();
     }
@@ -63,9 +63,10 @@ public class SquadManager : MonoBehaviour
         {
             squad.UpdateSquad();
 
-            if (Vector2.Distance(squad.transform.position, squad.TargetLocation) <= distanceToAttack)
+            if (Vector2.Distance(squad.transform.position, squad.TargetLocation.transform.position) <= distanceToAttack)
             {
-                DamageTower(squad); // pass in the tower to attack
+                //DamageTower(squad); // pass in the tower to attack
+                squad.TargetLocation.damageBuilding(squad.NumUnits, squad.Team);
                 squadsToRemove.Add(squad);
             }
         }
@@ -84,9 +85,10 @@ public class SquadManager : MonoBehaviour
         {
             squad.UpdateSquad();
 
-            if (Vector2.Distance(squad.transform.position, squad.TargetLocation) <= distanceToAttack)
+            if (Vector2.Distance(squad.transform.position, squad.TargetLocation.transform.position) <= distanceToAttack)
             {
-                DamageTower(squad); // pass in the tower to attack
+                //DamageTower(squad); // pass in the tower to attack
+                squad.TargetLocation.damageBuilding(squad.NumUnits, squad.Team);
                 squadsToRemove.Add(squad);
             }
         }
@@ -114,7 +116,7 @@ public class SquadManager : MonoBehaviour
     /// <param name="_numUnits"></param>
     /// <param name="_startLocation"></param>
     /// <param name="_targetLocation"></param>
-    public void CreateSquad(int _team, int _unitType, int _numUnits, Vector2 _startLocation, Vector2 _targetLocation)
+    public void CreateSquad(int _team, int _unitType, int _numUnits, Vector2 _startLocation, Building _targetLocation)
     {
         GameObject newSquad = Instantiate(squadPrefab, _startLocation, Quaternion.identity);
         Squad newSquadScript = newSquad.GetComponent<Squad>();
@@ -124,16 +126,13 @@ public class SquadManager : MonoBehaviour
 
         if (_team == 0)
         {
+            newSquadScript.Team = "P";
             playerSquads.Add(newSquadScript);
             return;
         }
 
+        newSquadScript.Team = "E";
         enemySquads.Add(newSquadScript);
-    }
-
-    public void DamageTower(Squad _squad)
-    {
-        Debug.Log("Tower damaged.");
     }
 
     #endregion

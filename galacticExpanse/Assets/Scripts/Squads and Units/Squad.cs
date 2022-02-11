@@ -8,11 +8,18 @@ public class Squad : MonoBehaviour
 
     [SerializeField] private int numUnits;
     [SerializeField] private float speed;
-    [SerializeField] private Vector2 targetLocation; // change to a base
+    [SerializeField] private Building targetLocation; // change to a base
+    [SerializeField] private string team;
 
     #endregion
 
     #region Properties
+
+    public string Team
+    {
+        get { return team; }
+        set { team = value; }
+    }
 
     public int NumUnits
     {
@@ -20,7 +27,7 @@ public class Squad : MonoBehaviour
         set { numUnits = value; }
     }
 
-    public Vector2 TargetLocation
+    public Building TargetLocation
     {
         set { targetLocation = value; }
         get { return targetLocation; }
@@ -31,6 +38,6 @@ public class Squad : MonoBehaviour
     public void UpdateSquad()
     {
         //Debug.Log("Updating position...");
-        transform.position = Vector2.MoveTowards(transform.position, targetLocation, Time.deltaTime * speed);
+        transform.position = Vector2.MoveTowards(transform.position, targetLocation.gameObject.transform.position, Time.deltaTime * speed);
     }
 }

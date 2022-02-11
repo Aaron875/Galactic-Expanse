@@ -72,7 +72,7 @@ public class Building : MonoBehaviour
                 {
 
                     numUnits -= squadUnits;
-                    Mathf.Abs(numUnits);
+                    numUnits = Mathf.Abs(numUnits);
                     alignment = "E";
                 }
                 else
@@ -99,7 +99,7 @@ public class Building : MonoBehaviour
                 {
 
                     numUnits -= squadUnits;
-                    Mathf.Abs(numUnits);
+                    numUnits = Mathf.Abs(numUnits);
                     alignment = "P";
                 }
                 else
@@ -114,7 +114,7 @@ public class Building : MonoBehaviour
                 {
 
                     numUnits -= squadUnits;
-                    Mathf.Abs(numUnits);
+                    numUnits = Mathf.Abs(numUnits);
                     alignment = "P";
                 }
                 else
@@ -129,7 +129,7 @@ public class Building : MonoBehaviour
                 {
 
                     numUnits -= squadUnits;
-                    Mathf.Abs(numUnits);
+                    numUnits = Mathf.Abs(numUnits);
                     alignment = "E";
                 }
                 else

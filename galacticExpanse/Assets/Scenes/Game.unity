@@ -1150,13 +1150,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98043a9eeb8123a498bb4789a1742fb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  squadManager: {fileID: 123619684}
   draggableMask:
     serializedVersion: 2
     m_Bits: 64
   hittableMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   selectedObject2: {fileID: 0}
 --- !u!1 &1088591991 stripped
 GameObject:
@@ -1213,6 +1212,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4644773415547759740, guid: c93d610bfa53cbe419ce4d9a518e0d1b, type: 3}
+      propertyPath: numUnits
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 4644773415547759740, guid: c93d610bfa53cbe419ce4d9a518e0d1b, type: 3}
       propertyPath: unitText
       value: 
@@ -1280,7 +1283,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4644773415547759740, guid: c93d610bfa53cbe419ce4d9a518e0d1b, type: 3}
       propertyPath: numUnits
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4644773415547759740, guid: c93d610bfa53cbe419ce4d9a518e0d1b, type: 3}
       propertyPath: unitText
@@ -1425,6 +1428,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4644773415547759740, guid: c93d610bfa53cbe419ce4d9a518e0d1b, type: 3}
+      propertyPath: numUnits
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 4644773415547759740, guid: c93d610bfa53cbe419ce4d9a518e0d1b, type: 3}
       propertyPath: unitText
       value: 

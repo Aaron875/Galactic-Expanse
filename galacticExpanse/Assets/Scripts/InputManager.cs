@@ -1,26 +1,64 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] GameObject base1;
-    private void Update()
+    public LayerMask draggableMask;
+    GameObject selectedObject;
+    bool isDragging;
+    [SerializeField] GameObject[] enemyBuildings;
+    Vector3 pos;
+    Vector3 originPos;
+
+    void Start()
     {
-        // For Click and Drag function keep as GetMouseButton, if wanting to change to only click, revert to GetMouseButtonDown
-        // 0 = Left Click
-        // 1 = Right Click
-        // 2 = Middle Click
-        if (Input.GetMouseButton(0))
+        isDragging = false;
+    }
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
         {
-            // Currently how this works is any object this script is attached to becomes an object movable by the mouse.
-            // If we want this script to be universal (preferred) raycasting will need to be performed
-            Vector3 mouse = Input.mousePosition; // grabs current mouse position as soon as the object is clicked on
-            base.transform.position = mouse; // Sets the clicked object's position  to the mouse's position
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, draggableMask);
+            if(hit.collider != null)
+            {
+                //Debug.Log(hit.collider.gameObject.name);
+                selectedObject = hit.collider.gameObject;
+                originPos = selectedObject.transform.position;
+                isDragging = true;
+                 
+            }
         }
 
+        if (isDragging)
+        {
+            pos = mousePos();
+            selectedObject.transform.position = pos;
+        }
 
+        if (Input.GetMouseButtonUp(0))
+        {
+            isDragging = false;
+            selectedObject.transform.position = originPos;
+        }
     }
 
+    Vector3 mousePos()
+    {
+        return Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
+    }
+
+
+    public void HitDetection()
+    {
+        for(int i = 0; i < enemyBuildings.Length; i++)
+        {
+            if (enemyBuildings[i].transform.position == pos)
+            {
+                Debug.Log("hit detected");
+            }
+        }
+
+    }
 }

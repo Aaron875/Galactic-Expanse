@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    [SerializeField] private SquadManager squadManager;
+    private Building startLocation;
+    private Building targetLocation;
+
     public LayerMask draggableMask;
     public LayerMask hittableMask;
     GameObject selectedObject;
@@ -14,6 +18,7 @@ public class InputManager : MonoBehaviour
 
     void Start()
     {
+        //squadManager = GetComponent<SquadManager>();
         isDragging = false;
     }
     void Update()
@@ -30,6 +35,7 @@ public class InputManager : MonoBehaviour
                 selectedObject.GetComponent<CircleCollider2D>().enabled = false;
                 originPos = selectedObject.transform.position;
                 isDragging = true;
+                startLocation = selectedObject.GetComponent<Building>();
             }
         }
 
@@ -46,6 +52,12 @@ public class InputManager : MonoBehaviour
             {
                 selectedObject.transform.position = originPos;
                 selectedObject.GetComponent<CircleCollider2D>().enabled = true;
+                if(startLocation != null && targetLocation != null)
+                {
+                    Attack(startLocation, targetLocation);
+                    startLocation = null;
+                    targetLocation = null;
+                }
             }
         }
 
@@ -69,7 +81,23 @@ public class InputManager : MonoBehaviour
         {
             //Debug.Log(hit.collider.gameObject.name);
             selectedObject2 = hit.collider.gameObject;
+            targetLocation = selectedObject2.GetComponent<Building>();
+        }
+    }
 
+    private void Attack(Building _startLocation, Building _targetLocation)
+    {
+        //This makes sure that the unit numbers will not be weird if it has an odd number
+        if (_startLocation.NumUnits % 2 == 0)
+        {
+            _startLocation.NumUnits = _startLocation.NumUnits / 2;
+            squadManager.CreateSquad(0, 0, _startLocation.NumUnits, _startLocation.transform.position, _targetLocation);
+        }
+        else
+        {
+            _startLocation.NumUnits = _startLocation.NumUnits / 2;
+            squadManager.CreateSquad(0, 0, _startLocation.NumUnits, _startLocation.transform.position, _targetLocation);
+            _startLocation.NumUnits++;
         }
     }
 }

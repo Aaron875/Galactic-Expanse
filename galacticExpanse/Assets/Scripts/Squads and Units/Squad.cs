@@ -30,7 +30,7 @@ public class Squad : MonoBehaviour
 
     public void UpdateSquad()
     {
-        Debug.Log("Updating position...");
+        //Debug.Log("Updating position...");
         transform.position = Vector2.MoveTowards(transform.position, targetLocation, Time.deltaTime * speed);
     }
 }

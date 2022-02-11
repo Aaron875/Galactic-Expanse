@@ -5,9 +5,10 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     public LayerMask draggableMask;
+    public LayerMask hittableMask;
     GameObject selectedObject;
+    [SerializeField] GameObject selectedObject2; // this is the building to be returned as the target
     bool isDragging;
-    [SerializeField] GameObject[] enemyBuildings;
     Vector3 pos;
     Vector3 originPos;
 
@@ -17,6 +18,7 @@ public class InputManager : MonoBehaviour
     }
     void Update()
     {
+        // Called when left mouse click is held down
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -25,6 +27,7 @@ public class InputManager : MonoBehaviour
             {
                 //Debug.Log(hit.collider.gameObject.name);
                 selectedObject = hit.collider.gameObject;
+                selectedObject.GetComponent<CircleCollider2D>().enabled = false;
                 originPos = selectedObject.transform.position;
                 isDragging = true;
             }
@@ -42,8 +45,11 @@ public class InputManager : MonoBehaviour
             if (selectedObject != null)
             {
                 selectedObject.transform.position = originPos;
+                selectedObject.GetComponent<CircleCollider2D>().enabled = true;
             }
         }
+
+        HitDetection();
     }
 
     Vector3 mousePos()
@@ -51,16 +57,19 @@ public class InputManager : MonoBehaviour
         return Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
     }
 
-
+    /// <summary>
+    /// Detects a hit using raycasts
+    /// </summary>
     public void HitDetection()
     {
-        for(int i = 0; i < enemyBuildings.Length; i++)
+        // Raycast for hit detection of target building
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, hittableMask);
+        if (hit.collider != null)
         {
-            if (enemyBuildings[i].transform.position == pos)
-            {
-                Debug.Log("hit detected");
-            }
-        }
+            //Debug.Log(hit.collider.gameObject.name);
+            selectedObject2 = hit.collider.gameObject;
 
+        }
     }
 }

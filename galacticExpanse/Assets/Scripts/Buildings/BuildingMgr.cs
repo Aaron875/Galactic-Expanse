@@ -8,16 +8,11 @@ public class BuildingMgr : MonoBehaviour
     [SerializeField] private Sprite playerSprite;
     [SerializeField] private Sprite enemySprite;
     [SerializeField] private List<Building> buildings;
+    [SerializeField] private List<GameObject> buildingsForLayer;
 
     public List<Building> Buildings
     {
         get { return buildings; }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame
@@ -29,11 +24,17 @@ public class BuildingMgr : MonoBehaviour
                 buildings[i].Alignment == "P")
             {
                 buildings[i].SpriteRenderer.sprite = playerSprite;
+
+                buildingsForLayer[i].layer = 6;
             }
             else if (buildings[i].SpriteRenderer.sprite != enemySprite &&
                     buildings[i].Alignment == "E")
             {
                 buildings[i].SpriteRenderer.sprite = enemySprite;
+                if (buildingsForLayer[i].layer == 6)
+                {
+                    buildingsForLayer[i].layer = 0;
+                }
             }
         }
     }

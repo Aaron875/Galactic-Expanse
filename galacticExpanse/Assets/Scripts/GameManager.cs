@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     {
         timer += Time.deltaTime;
 
+        //Change number to change how quickly buildings gain units
         if(timer >= 4)
         {
             UpdateBases();

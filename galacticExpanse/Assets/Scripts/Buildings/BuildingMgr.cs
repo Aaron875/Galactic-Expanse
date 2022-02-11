@@ -34,7 +34,7 @@ public class BuildingMgr : MonoBehaviour
                 buildings[i].SpriteRenderer.sprite = enemySprite;
                 if (buildingsForLayer[i].layer == 6)
                 {
-                    buildingsForLayer[i].layer = 0;
+                    buildingsForLayer[i].layer = 7;
                     buildings[i].SpriteRenderer.sortingOrder = 0;
                 }
             }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9209507285268843789}
   - component: {fileID: 6242324609024974664}
   - component: {fileID: 4644773415547759740}
+  - component: {fileID: 1506306143676027403}
   m_Layer: 0
   m_Name: cyan-planet
   m_TagString: Untagged
@@ -96,5 +97,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numUnits: 40
-  alignment: P
+  alignment: N
   spriteRenderer: {fileID: 6242324609024974664}
+  type: 
+--- !u!58 &1506306143676027403
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7987627958407996070}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 5.12

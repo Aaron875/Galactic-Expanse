@@ -31,7 +31,7 @@ public class EnemyManager : MonoBehaviour
             if (buildings[i].Alignment == "E" && buildings[i].NumUnits >= 15)
             {
                 randomNum = Random.Range(0, 10000);
-                if (randomNum * 20 < buildings[i].NumUnits) // The *20 is the nerf the enemy. The higher the number the less active it will be.
+                if (randomNum * 10 < buildings[i].NumUnits) // The *20 is the nerf the enemy. The higher the number the less active it will be.
                 {
 
                     int target = (int)Random.Range(0, buildings.Count); //This is for the target of the attack

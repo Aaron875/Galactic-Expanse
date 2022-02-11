@@ -1153,10 +1153,10 @@ MonoBehaviour:
   draggableMask:
     serializedVersion: 2
     m_Bits: 64
-  enemyBuildings:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  hittableMask:
+    serializedVersion: 2
+    m_Bits: 0
+  selectedObject2: {fileID: 0}
 --- !u!1 &1088591991 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7987627958407996070, guid: c93d610bfa53cbe419ce4d9a518e0d1b, type: 3}
@@ -1279,7 +1279,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4644773415547759740, guid: c93d610bfa53cbe419ce4d9a518e0d1b, type: 3}
       propertyPath: numUnits
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4644773415547759740, guid: c93d610bfa53cbe419ce4d9a518e0d1b, type: 3}
       propertyPath: unitText

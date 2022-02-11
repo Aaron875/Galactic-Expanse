@@ -31,5 +31,87 @@ public class Building : MonoBehaviour
         get { return spriteRenderer; }
     }
 
+    public void damageBuilding (int squadNum, string squadAlignment )
+    {
+        switch((alignment, squadAlignment))
+        {
+            case ("P", "P"):
+                if (numUnits + squadNum <= 50)
+                {
+                    numUnits += squadNum;
+                }
+                else
+                {
+                    numUnits = 50;
+                }
+                break;
 
+            case ("P", "E"):
+                if (numUnits - squadNum <= 0)
+                {
+
+                    numUnits -= squadNum;
+                    Mathf.Abs(numUnits);
+                    alignment = "E";
+                }
+                else
+                {
+                    numUnits -= squadNum;
+                }
+                break;
+
+            case ("E", "E"):
+                if (numUnits + squadNum <= 50)
+                {
+                    numUnits += squadNum;
+                }
+                else
+                {
+                    numUnits = 50;
+                }
+                break;
+
+            case ("E", "P"):
+                if (numUnits - squadNum <= 0)
+                {
+
+                    numUnits -= squadNum;
+                    Mathf.Abs(numUnits);
+                    alignment = "P";
+                }
+                else
+                {
+                    numUnits -= squadNum;
+                }
+                break;
+
+            case ("N", "P"):
+                if (numUnits - squadNum <= 0)
+                {
+
+                    numUnits -= squadNum;
+                    Mathf.Abs(numUnits);
+                    alignment = "P";
+                }
+                else
+                {
+                    numUnits -= squadNum;
+                }
+                break;
+
+            case ("N", "E"):
+                if (numUnits - squadNum <= 0)
+                {
+
+                    numUnits -= squadNum;
+                    Mathf.Abs(numUnits);
+                    alignment = "E";
+                }
+                else
+                {
+                    numUnits -= squadNum;
+                }
+                break;
+        }
+    }
 }

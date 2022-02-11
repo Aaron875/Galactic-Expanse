@@ -8,6 +8,7 @@ public class Building : MonoBehaviour
     [SerializeField] private string alignment;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private string type;
+    private string displayUnits;
 
     public int NumUnits
     {
@@ -31,86 +32,102 @@ public class Building : MonoBehaviour
         get { return spriteRenderer; }
     }
 
-    public void damageBuilding (int squadNum, string squadAlignment )
+    public string DisplayUnits
+    {
+        get { return displayUnits; }
+    }
+
+    void Start()
+    {
+        displayUnits = numUnits.ToString();
+    }
+
+    public void damageBuilding (int squadUnits, string squadAlignment )
     {
         switch((alignment, squadAlignment))
         {
             case ("P", "P"):
-                if (numUnits + squadNum <= 50)
+                if (numUnits + squadUnits <= 50)
                 {
-                    numUnits += squadNum;
+                    numUnits += squadUnits;
                 }
                 else
                 {
                     numUnits = 50;
                 }
+                displayUnits = numUnits.ToString();
                 break;
 
             case ("P", "E"):
-                if (numUnits - squadNum <= 0)
+                if (numUnits - squadUnits <= 0)
                 {
 
-                    numUnits -= squadNum;
+                    numUnits -= squadUnits;
                     Mathf.Abs(numUnits);
                     alignment = "E";
                 }
                 else
                 {
-                    numUnits -= squadNum;
+                    numUnits -= squadUnits;
                 }
+                displayUnits = numUnits.ToString();
                 break;
 
             case ("E", "E"):
-                if (numUnits + squadNum <= 50)
+                if (numUnits + squadUnits <= 50)
                 {
-                    numUnits += squadNum;
+                    numUnits += squadUnits;
                 }
                 else
                 {
                     numUnits = 50;
                 }
+                displayUnits = numUnits.ToString();
                 break;
 
             case ("E", "P"):
-                if (numUnits - squadNum <= 0)
+                if (numUnits - squadUnits <= 0)
                 {
 
-                    numUnits -= squadNum;
+                    numUnits -= squadUnits;
                     Mathf.Abs(numUnits);
                     alignment = "P";
                 }
                 else
                 {
-                    numUnits -= squadNum;
+                    numUnits -= squadUnits;
                 }
+                displayUnits = numUnits.ToString();
                 break;
 
             case ("N", "P"):
-                if (numUnits - squadNum <= 0)
+                if (numUnits - squadUnits <= 0)
                 {
 
-                    numUnits -= squadNum;
+                    numUnits -= squadUnits;
                     Mathf.Abs(numUnits);
                     alignment = "P";
                 }
                 else
                 {
-                    numUnits -= squadNum;
+                    numUnits -= squadUnits;
                 }
+                displayUnits = numUnits.ToString();
                 break;
 
             case ("N", "E"):
-                if (numUnits - squadNum <= 0)
+                if (numUnits - squadUnits <= 0)
                 {
 
-                    numUnits -= squadNum;
+                    numUnits -= squadUnits;
                     Mathf.Abs(numUnits);
                     alignment = "E";
                 }
                 else
                 {
-                    numUnits -= squadNum;
+                    numUnits -= squadUnits;
                 }
+                displayUnits = numUnits.ToString();
                 break;
         }
     }

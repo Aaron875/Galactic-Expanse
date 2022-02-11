@@ -26,6 +26,7 @@ public class BuildingMgr : MonoBehaviour
                 buildings[i].SpriteRenderer.sprite = playerSprite;
 
                 buildingsForLayer[i].layer = 6;
+                buildings[i].SpriteRenderer.sortingOrder = 1;
             }
             else if (buildings[i].SpriteRenderer.sprite != enemySprite &&
                     buildings[i].Alignment == "E")
@@ -34,6 +35,7 @@ public class BuildingMgr : MonoBehaviour
                 if (buildingsForLayer[i].layer == 6)
                 {
                     buildingsForLayer[i].layer = 0;
+                    buildings[i].SpriteRenderer.sortingOrder = 0;
                 }
             }
         }

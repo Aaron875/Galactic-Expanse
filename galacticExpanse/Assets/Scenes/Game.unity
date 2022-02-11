@@ -1278,7 +1278,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4644773415547759740, guid: c93d610bfa53cbe419ce4d9a518e0d1b, type: 3}
       propertyPath: numUnits
-      value: 5
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4644773415547759740, guid: c93d610bfa53cbe419ce4d9a518e0d1b, type: 3}
       propertyPath: unitText

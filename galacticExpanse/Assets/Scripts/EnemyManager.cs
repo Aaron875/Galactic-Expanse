@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
 
+    [SerializeField] private List<Building> buildings; //All the bases
     private GameManager gameManager;
     float randomNum;
     int attackCounter;
@@ -12,7 +13,7 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GetComponent<GameManager>();
+        buildings = GetComponent<BuildingMgr>().Buildings;
         randomNum = 10000;
         attackCounter = 0;
     }
@@ -20,18 +21,18 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for(int i = 0; i < gameManager.buildings.Count; i++)
+        for(int i = 0; i < buildings.Count; i++)
         {
 
 
-            if (gameManager.buildings[i].Alignment == "E" && gameManager.buildings[i].NumUnits >= 15)
+            if (buildings[i].Alignment == "E" && buildings[i].NumUnits >= 15)
             {
                 randomNum = Random.Range(0, 10000f);
-                if (randomNum * 6 < gameManager.buildings[i].NumUnits)
+                if (randomNum * 6 < buildings[i].NumUnits)
                 {
                     //Debug.Log("ATTACK " + randomNum);
                     //Debug.Log("Units " + gameManager.buildings[i].NumUnits);
-                    Debug.Log("Attack Number " + attackCounter);
+                    Debug.Log(i + " Attack Number " + attackCounter);
                     attackCounter++;
                 }
             }

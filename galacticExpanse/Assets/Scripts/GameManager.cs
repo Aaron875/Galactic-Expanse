@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public List<Building> buildings; //All the bases
+    [SerializeField] private List<Building> buildings; //All the bases
     public GameObject pStart; //Player Start
     public GameObject eStart; //Enemy Start
     private float timer; //Used for incrementing unit counts
@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         timer = 0;
+        buildings = GetComponent<BuildingMgr>().Buildings;
     }
 
     // Update is called once per frame
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour
     {
         for(int i = 0; i < buildings.Count; i++)
         {
-            if(buildings[i].Alignment != "N")
+            if(buildings[i].Alignment != "N" && buildings[i].NumUnits < 50)
             {
                 buildings[i].NumUnits += 1;
             }

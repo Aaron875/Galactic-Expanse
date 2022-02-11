@@ -180,6 +180,7 @@ GameObject:
   m_Component:
   - component: {fileID: 299624166}
   - component: {fileID: 299624168}
+  - component: {fileID: 299624167}
   m_Layer: 5
   m_Name: Objective
   m_TagString: Untagged
@@ -201,6 +202,22 @@ Transform:
   m_Father: {fileID: 2121529336}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &299624167
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 299624165}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0000019073486, y: -0.0000038146973}
+  serializedVersion: 2
+  m_Radius: 5.12
 --- !u!212 &299624168
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -360,6 +377,7 @@ GameObject:
   - component: {fileID: 1053431902}
   - component: {fileID: 1053431901}
   - component: {fileID: 1053431900}
+  - component: {fileID: 1053431903}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -432,6 +450,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1053431903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053431899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98043a9eeb8123a498bb4789a1742fb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  draggableMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1396897481
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,8 +475,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1396897482}
   - component: {fileID: 1396897483}
-  - component: {fileID: 1396897484}
-  m_Layer: 5
+  - component: {fileID: 1396897485}
+  m_Layer: 6
   m_Name: DragObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -515,21 +548,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1396897484
-MonoBehaviour:
+--- !u!58 &1396897485
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1396897481}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98043a9eeb8123a498bb4789a1742fb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  base1: {fileID: 1396897481}
-  base2: {fileID: 299624165}
-  squad: {fileID: 0}
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0000076293945, y: 0.12049561}
+  serializedVersion: 2
+  m_Radius: 3.9666595
 --- !u!1 &1871886284
 GameObject:
   m_ObjectHideFlags: 0
@@ -609,7 +643,7 @@ GameObject:
   - component: {fileID: 2121529334}
   - component: {fileID: 2121529333}
   - component: {fileID: 2121529337}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

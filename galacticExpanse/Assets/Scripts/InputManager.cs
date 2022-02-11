@@ -1,89 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class InputManager : MonoBehaviour
 {
-    [SerializeField] GameObject base1;
-    [SerializeField] GameObject base2;
-    [SerializeField] ScriptableObject squad;
+    public LayerMask draggableMask;
+    GameObject selectedObject;
+    bool isDragging;
 
-    Vector3 base1Pos;
-
-    private void Start()
+    void Start()
     {
-         base1Pos = base1.transform.position;
-
+        isDragging = false;
     }
-    private void Update()
+    void Update()
     {
-
-        // For Click and Drag function keep as GetMouseButton, if wanting to change to only click, revert to GetMouseButtonDown
-        // 0 = Left Click
-        // 1 = Right Click
-        // 2 = Middle Click
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            // Currently how this works is any object this script is attached to becomes an object movable by the mouse.
-            // If we want this script to be universal (preferred) raycasting will need to be performed
-            // grabs current mouse position as soon as the object is clicked on
-            Vector3 mouse = Input.mousePosition;
-            base1.transform.position = mouse; // Sets the clicked object's position  to the mouse's position
-            //Debug.Log(base1.gameObject); // for testing
-
-           
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, draggableMask);
+            if(hit.collider != null)
+            {
+                //Debug.Log(hit.collider.gameObject.name);
+                selectedObject = hit.collider.gameObject;
+                isDragging = true;
+            }
         }
 
-        HitDetection();
+        if (isDragging)
+        {
+            Vector3 pos = mousePos();
+            selectedObject.transform.position = pos;
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            isDragging = false;
+        }
     }
 
-    /// <summary>
-    /// NEED RAYCASTING WORKING FIRST
-    /// </summary>
-    private void HitDetection() 
+    Vector3 mousePos()
     {
-        // Bottom-right
-        //if (!Input.GetMouseButton(0) &&
-        //    base1.transform.position.x + 5 <= base2.transform.position.x + 5 &&
-        //    base1.transform.position.y + 5 <= base2.transform.position.y + 5)
-        //{
-        //    Debug.Log("Bottom-Right Hit Detected");
-        //    base1.transform.position = base1Pos;
-        //
-        //}
-
-
-        // Top-left ---BROKEN
-        // if (!Input.GetMouseButton(0) &&
-        //     base1.transform.position.x - 5 >= base2.transform.position.x - 5 &&
-        //     base1.transform.position.y + 5 <= base2.transform.position.y + 5)
-        // {
-        //     Debug.Log("Top-left Hit Detected");
-        //     base1.transform.position = base1Pos;
-        // 
-        // }
-
-        // Bottom-left --- BROKEN
-        //if (!Input.GetMouseButton(0) &&
-        //    base1.transform.position.x - 1 >= base2.transform.position.x - 1 &&
-        //    base1.transform.position.y - 1 >= base2.transform.position.y - 1)
-        //{
-        //    Debug.Log("Bottom-left Hit Detected");
-        //    base1.transform.position = base1Pos;
-        //
-        //}
-
-
-        // Bottom-right
-        //if (!Input.GetMouseButton(0) &&
-        //    base1.transform.position.x + 5 <= base2.transform.position.x + 5 &&
-        //    base1.transform.position.y - 5 >= base2.transform.position.y - 5)
-        //{
-        //    Debug.Log("Bottom-right Hit Detected");
-        //    base1.transform.position = base1Pos;
-        //
-        //}
+        return Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
     }
 
 }

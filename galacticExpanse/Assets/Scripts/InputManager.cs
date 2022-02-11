@@ -27,7 +27,6 @@ public class InputManager : MonoBehaviour
                 selectedObject = hit.collider.gameObject;
                 originPos = selectedObject.transform.position;
                 isDragging = true;
-                 
             }
         }
 

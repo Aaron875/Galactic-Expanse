@@ -365,7 +365,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da41d90ee5fe9a14596b08a422a6ae56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  squadPrefab: {fileID: 8472905053875474509, guid: 34066cee67f642246abd03b4a79d1a45, type: 3}
+  playerSquadPrefab: {fileID: 8472905053875474509, guid: 5e4caf5f9b711c04ba70e8c5ee69a0f1, type: 3}
+  enemySquadPrefab: {fileID: 8472905053875474509, guid: 34066cee67f642246abd03b4a79d1a45, type: 3}
   playerSquads: []
   enemySquads: []
   distanceToAttack: 0

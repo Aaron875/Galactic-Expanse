@@ -8,7 +8,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private List<Building> buildings; //All the bases
     private GameManager gameManager;
     private SquadManager squadManager;
-    float randomNum;
+    int randomNum;
     //int attackCounter; - Variable just for testing, basically can be ignored
 
     // Start is called before the first frame update
@@ -30,8 +30,8 @@ public class EnemyManager : MonoBehaviour
 
             if (buildings[i].Alignment == "E" && buildings[i].NumUnits >= 15)
             {
-                randomNum = Random.Range(0, 10000f);
-                if (randomNum * 6 < buildings[i].NumUnits)
+                randomNum = Random.Range(0, 10000);
+                if (20 * randomNum < buildings[i].NumUnits)
                 {
                     //Debug.Log("ATTACK " + randomNum);
                     //Debug.Log("Units " + gameManager.buildings[i].NumUnits);
@@ -39,10 +39,12 @@ public class EnemyManager : MonoBehaviour
                     //attackCounter++;
 
                     int target = (int)Random.Range(0, buildings.Count);
+                    //Debug.Log(target);
 
-                    while(target == 1)
+                    while (target == i) //This ensures that it will not target itself
                     {
                         target = (int)Random.Range(0, buildings.Count);
+                        //Debug.Log(target);
                     }
 
                     if (buildings[i].NumUnits % 2 == 0)

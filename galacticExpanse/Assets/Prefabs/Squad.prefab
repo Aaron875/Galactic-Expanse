@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numUnits: 0
-  speed: 2
+  speed: 30
   targetLocation: {fileID: 0}
   team: 
 --- !u!1 &8472905054332447693

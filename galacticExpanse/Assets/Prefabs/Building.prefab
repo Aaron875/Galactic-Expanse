@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6242324609024974664}
   - component: {fileID: 4644773415547759740}
   - component: {fileID: 1506306143676027403}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Building
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b75c0dcead2ad4d866fb87b31a2829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numUnits: 50
+  numUnits: 30
   alignment: N
   spriteRenderer: {fileID: 6242324609024974664}
   type: 

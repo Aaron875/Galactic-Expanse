@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if(timer >= 4)
+        if(timer >= .1)
         {
             UpdateBases();
             timer = 0;

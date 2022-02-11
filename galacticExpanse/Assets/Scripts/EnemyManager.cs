@@ -31,7 +31,7 @@ public class EnemyManager : MonoBehaviour
             if (buildings[i].Alignment == "E" && buildings[i].NumUnits >= 15)
             {
                 randomNum = Random.Range(0, 10000);
-                if (20 * randomNum < buildings[i].NumUnits)
+                if (randomNum < buildings[i].NumUnits)
                 {
                     //Debug.Log("ATTACK " + randomNum);
                     //Debug.Log("Units " + gameManager.buildings[i].NumUnits);

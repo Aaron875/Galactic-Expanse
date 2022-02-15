@@ -18,6 +18,7 @@ public class BuildingMgr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //when the alignment of a building changes the buildings sprite will change to who ever now controls it
         for (int i = 0; i < buildings.Count; i++)
         {
             if (buildings[i].SpriteRenderer.sprite != playerSprite && 

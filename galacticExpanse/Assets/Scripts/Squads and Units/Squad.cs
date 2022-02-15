@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Squad : MonoBehaviour
 {
@@ -11,9 +12,20 @@ public class Squad : MonoBehaviour
     [SerializeField] private Building targetLocation; // change to a base
     [SerializeField] private string team;
 
+    //all variables used here are for the text boxes above the squad
+    private Text textPrefab;
+    private Canvas renderCanvas;
+    private string displayUnits;
+    private Text tempTextBox;
+
     #endregion
 
     #region Properties
+
+    public Text TempTextBox
+    {
+        get { return tempTextBox; }
+    }
 
     public string Team
     {
@@ -35,9 +47,33 @@ public class Squad : MonoBehaviour
 
     #endregion
 
+    private void Start()
+    {
+        //set the prefab as an object from the scene and then instantiate the object
+        textPrefab = GameObject.Find("Squad Text Prefab").GetComponent<Text>();
+        tempTextBox = Instantiate(textPrefab, new Vector3(transform.position.x, transform.position.y, 0f), Quaternion.identity) as Text;
+
+        //find the canvas in the scene and then set it as the parent to the text
+        renderCanvas = FindObjectOfType<Canvas>();
+        tempTextBox.transform.SetParent(renderCanvas.transform, false);
+
+        //Set the text box's text element to the current numUnits
+        displayUnits = numUnits.ToString();
+        tempTextBox.text = displayUnits;
+    }
+
     public void UpdateSquad()
     {
         //Debug.Log("Updating position...");
+        
+        //for some reason when the squad is initially made tempTextBox is null while this method is being called
+        //this only happens for enemy squads and not player squads
+        if (tempTextBox)
+        {
+            tempTextBox.rectTransform.position = new Vector3(transform.position.x, transform.position.y, 0.0f);
+            //Debug.Log(tempTextBox);
+        }
         transform.position = Vector2.MoveTowards(transform.position, targetLocation.gameObject.transform.position, Time.deltaTime * speed);
+        
     }
 }

@@ -75,6 +75,7 @@ public class SquadManager : MonoBehaviour
         {
             for(int i = 0; i < squadsToRemove.Count; i++)
             {
+                Destroy(squadsToRemove[i].TempTextBox.gameObject);
                 playerSquads.Remove(squadsToRemove[i]);
                 Destroy(squadsToRemove[i].gameObject);
             }
@@ -97,6 +98,7 @@ public class SquadManager : MonoBehaviour
         {
             for (int i = 0; i < squadsToRemove.Count; i++)
             {
+                Destroy(squadsToRemove[i].TempTextBox.gameObject);
                 enemySquads.Remove(squadsToRemove[i]);
                 Destroy(squadsToRemove[i].gameObject);
             }

@@ -51,6 +51,14 @@ public class Building : MonoBehaviour
         unitText.text = displayUnits;
     }
 
+
+    /// <summary>
+    /// allows the squads to do damage to each building
+    /// depending on the units alignment the squad will either reinforce or damage a givin building
+    /// if a buildings unit count is reduced to zero by its opponents squad the buildings alignment will flip to be the opponents
+    /// </summary>
+    /// <param name="squadUnits"></param>
+    /// <param name="squadAlignment"></param>
     public void damageBuilding (int squadUnits, string squadAlignment )
     {
         switch((alignment, squadAlignment))

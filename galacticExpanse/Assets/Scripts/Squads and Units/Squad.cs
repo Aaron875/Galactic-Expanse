@@ -65,14 +65,10 @@ public class Squad : MonoBehaviour
     public void UpdateSquad()
     {
         //Debug.Log("Updating position...");
+  
+        tempTextBox.rectTransform.position = new Vector3(transform.position.x, transform.position.y, 0.0f);
+        //Debug.Log(tempTextBox);
         
-        //for some reason when the squad is initially made tempTextBox is null while this method is being called
-        //this only happens for enemy squads and not player squads
-        if (tempTextBox)
-        {
-            tempTextBox.rectTransform.position = new Vector3(transform.position.x, transform.position.y, 0.0f);
-            //Debug.Log(tempTextBox);
-        }
         transform.position = Vector2.MoveTowards(transform.position, targetLocation.gameObject.transform.position, Time.deltaTime * speed);
         
     }

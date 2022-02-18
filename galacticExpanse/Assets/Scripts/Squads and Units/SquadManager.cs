@@ -41,7 +41,7 @@ public class SquadManager : MonoBehaviour
         enemySquads = new List<Squad>();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         // Debug spawing squads
 /*        if(Input.GetMouseButtonDown(0))

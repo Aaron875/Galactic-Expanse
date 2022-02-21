@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InputManager : MonoBehaviour
 {
@@ -10,22 +11,30 @@ public class InputManager : MonoBehaviour
 
     public LayerMask draggableMask;
     public LayerMask hittableMask;
-    GameObject selectedObject;
+    [SerializeField] GameObject selectedObject;
     [SerializeField] GameObject selectedObject2; // this is the building to be returned as the target
     bool isDragging;
     Vector3 pos;
     Vector3 originPos;
 
+    // Line Renderer stuff
+    private LineRenderer lr;
+    private Transform[] points;
+
     void Start()
     {
         //squadManager = GetComponent<SquadManager>();
         isDragging = false;
+        lr = GetComponent<LineRenderer>();
+        lr.positionCount = 2;
     }
     void Update()
     {
         // Called when left mouse click is held down
         if (Input.GetMouseButtonDown(0))
         {
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, draggableMask);
             if(hit.collider != null)
@@ -36,17 +45,21 @@ public class InputManager : MonoBehaviour
                 originPos = selectedObject.transform.position;
                 isDragging = true;
                 startLocation = selectedObject.GetComponent<Building>();
+
+                lr.SetPosition(0, originPos);
             }
         }
 
         if (isDragging)
         {
             pos = mousePos();
-            selectedObject.transform.position = pos;
+            lr.SetPosition(1, pos);
         }
 
         if (Input.GetMouseButtonUp(0))
         {
+            lr.SetPosition(0, new Vector3(0, 0, 0));
+            lr.SetPosition(1, new Vector3(0,0,0));
             isDragging = false;
             if (selectedObject != null)
             {
@@ -99,5 +112,11 @@ public class InputManager : MonoBehaviour
             squadManager.CreateSquad(0, 0, _startLocation.NumUnits, _startLocation.transform.position, _targetLocation);
             _startLocation.NumUnits++;
         }
+    }
+
+    public void SetUpLine(Transform[] points)
+    {
+        lr.positionCount = points.Length;
+        this.points = points;
     }
 }

@@ -8,10 +8,16 @@ public class GameManager : MonoBehaviour
     public GameObject pStart; //Player Start
     public GameObject eStart; //Enemy Start
     private float timer; //Used for incrementing unit counts
+    [SerializeField] private bool isPaused = true;
+
+    // Managers
+    private EnemyManager enemyManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        enemyManager = GetComponent<EnemyManager>();
+
         timer = 0;
         buildings = GetComponent<BuildingMgr>().Buildings;
     }
@@ -26,6 +32,12 @@ public class GameManager : MonoBehaviour
         {
             UpdateBases();
             timer = 0;
+        }
+
+        if(!isPaused)
+        {
+            Debug.Log("Updating AI...");
+            enemyManager.UpdateAI();
         }
     }
 

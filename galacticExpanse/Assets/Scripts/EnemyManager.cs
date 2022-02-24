@@ -24,10 +24,9 @@ public class EnemyManager : MonoBehaviour
         //attackCounter = 0;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateAI()
     {
-        for(int i = 0; i < buildings.Count; i++) //Loops through all buildings
+        for (int i = 0; i < buildings.Count; i++) //Loops through all buildings
         {
 
             if (buildings[i].Alignment == "E" && buildings[i].NumUnits >= 15) //If a building is an enemy building and has 15 or more units
@@ -67,7 +66,11 @@ public class EnemyManager : MonoBehaviour
                     }
                     timer = 0;
                 }
+            }
 
+    // Update is called once per frame
+    void Update()
+    {
                 /*randomNum = Random.Range(0, 10000);
                 if (randomNum * 10 < buildings[i].NumUnits) // The *20 is the nerf the enemy. The higher the number the less active it will be.
                 {

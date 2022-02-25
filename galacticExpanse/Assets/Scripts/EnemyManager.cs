@@ -37,7 +37,7 @@ public class EnemyManager : MonoBehaviour
                 //Change number to change how quickly buildings gain units
                 if (timer >= 2)
                 {
-                    randomNum = Random.Range(0, 1000); //1000 is just randomly there, can be changed
+                    randomNum = Random.Range(0, 750); //1000 is just randomly there, can be changed
                     if (randomNum < buildings[i].NumUnits || buildings[i].NumUnits >= 50) //If the number is less than the unit count it attacks, more aggressive the more units it has
                     {
 

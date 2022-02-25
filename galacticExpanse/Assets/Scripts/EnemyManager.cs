@@ -38,7 +38,7 @@ public class EnemyManager : MonoBehaviour
                 if (timer >= 2)
                 {
                     randomNum = Random.Range(0, 1000); //1000 is just randomly there, can be changed
-                    if (randomNum < buildings[i].NumUnits) //If the number is less than the unit count it attacks, more aggressive the more units it has
+                    if (randomNum < buildings[i].NumUnits || buildings[i].NumUnits >= 50) //If the number is less than the unit count it attacks, more aggressive the more units it has
                     {
 
                         int target = (int)Random.Range(0, buildings.Count); //This is for the target of the attack

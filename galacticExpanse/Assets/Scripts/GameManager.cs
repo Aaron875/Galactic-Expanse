@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject tutorialStep1;
     [SerializeField] private GameObject tutorialStep2;
 
+    [SerializeField] private GameObject replayButton;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,9 +73,9 @@ public class GameManager : MonoBehaviour
             {
                 tutorialStep2.SetActive(false);
             }
-
-            CheckWinState();
         }
+
+        CheckWinState();
     }
 
     void UpdateBases()
@@ -93,15 +95,53 @@ public class GameManager : MonoBehaviour
 
     void CheckWinState()
     {
+        int playerBuildings = 0;
+        int enemyBuildings = 0;
+        int neutralBuildings = 0;
+
+        // Calculate how many buildings each team has
         foreach(Building building in buildings)
         {
-            if(building.Alignment == "E")
+            switch (building.Alignment)
             {
-                return;
+                case "P":
+                    playerBuildings++;
+                    break;
+                case "N":
+                    neutralBuildings++;
+                    break;
+                case "E":
+                    enemyBuildings++;
+                    break;
             }
         }
 
-        // Set the victory state
-        SceneManager.LoadScene("Game");
+
+        // Ends the game and either exits the tutorial or shows the replay button
+        if(playerBuildings == buildings.Count - neutralBuildings)
+        {
+            if(isTutorialActive)
+                SceneManager.LoadScene("Game");
+            else
+            {
+                isPaused = true;
+                replayButton.SetActive(true);
+            }
+        }
+        else if(enemyBuildings == buildings.Count - neutralBuildings)
+        {
+            if (isTutorialActive)
+                SceneManager.LoadScene("Tutorial");
+            else
+            {
+                isPaused = true;
+                replayButton.SetActive(true);
+            }
+        }
+    }
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

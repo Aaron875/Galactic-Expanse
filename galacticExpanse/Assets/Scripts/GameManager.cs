@@ -86,7 +86,8 @@ public class GameManager : MonoBehaviour
             {
                 // tutorial only
                 if (SceneManager.GetActiveScene().name == "Tutorial" &&
-                    buildings[i].Alignment == "E") continue;
+                    buildings[i].Alignment == "E" &&
+                    tutorialStep1.activeInHierarchy) continue;
 
                 buildings[i].NumUnits += 1;
             }

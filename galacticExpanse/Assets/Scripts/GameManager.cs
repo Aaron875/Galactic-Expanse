@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject eStart; //Enemy Start
     private float timer; //Used for incrementing unit counts
     [SerializeField] private bool isTutorialActive = false;
-    [SerializeField] private bool isPaused = true;
+    [SerializeField] private bool isPaused = false;
 
     // Managers
     private EnemyManager enemyManager;
@@ -23,17 +23,19 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(SceneManager.GetActiveScene().name == "Tutorial")
+        enemyManager = GetComponent<EnemyManager>();
+        buildings = GetComponent<BuildingMgr>().Buildings;
+        Debug.Log(buildings.Count);
+
+        if (SceneManager.GetActiveScene().name == "Tutorial")
         {
+            isPaused = true;
             isTutorialActive = true;
-/*            tutorialStep1.SetActive(true);
-            tutorialStep2.SetActive(false);*/
+            tutorialStep1.SetActive(true);
+            tutorialStep2.SetActive(false);
         }
 
-        enemyManager = GetComponent<EnemyManager>();
-
         timer = 0;
-        buildings = GetComponent<BuildingMgr>().Buildings;
     }
 
     // Update is called once per frame
@@ -55,10 +57,22 @@ public class GameManager : MonoBehaviour
 
         if(isTutorialActive)
         {
-/*            if (buildingManager.Buildings[2].Alignment == "P")
+            if (buildings[2].Alignment == "P" && isPaused)
             {
                 tutorialStep1.SetActive(false);
-            }*/
+                tutorialStep2.SetActive(true);
+                isPaused = false;
+
+                buildings[1].NumUnits = 40;
+                buildings[2].NumUnits = 40;
+            }
+
+            if(tutorialStep2.activeInHierarchy && buildings[0].Alignment == "P")
+            {
+                tutorialStep2.SetActive(false);
+            }
+
+            CheckWinState();
         }
     }
 
@@ -68,8 +82,26 @@ public class GameManager : MonoBehaviour
         {
             if(buildings[i].Alignment != "N" && buildings[i].NumUnits < 50)
             {
+                // tutorial only
+                if (SceneManager.GetActiveScene().name == "Tutorial" &&
+                    buildings[i].Alignment == "E") continue;
+
                 buildings[i].NumUnits += 1;
             }
         }
+    }
+
+    void CheckWinState()
+    {
+        foreach(Building building in buildings)
+        {
+            if(building.Alignment == "E")
+            {
+                return;
+            }
+        }
+
+        // Set the victory state
+        SceneManager.LoadScene("Game");
     }
 }

@@ -37,11 +37,33 @@ public class EnemyManager : MonoBehaviour
                 //Change number to change how quickly buildings gain units
                 if (timer >= 2)
                 {
-                    randomNum = Random.Range(0, 750); //1000 is just randomly there, can be changed
+                    randomNum = Random.Range(0, 600); //600 is just randomly there, can be changed
                     if (randomNum < buildings[i].NumUnits || buildings[i].NumUnits >= 50) //If the number is less than the unit count it attacks, more aggressive the more units it has
                     {
 
-                        int target = (int)Random.Range(0, buildings.Count); //This is for the target of the attack
+                        int target;
+                        target = (int)Random.Range(0, buildings.Count); //This is for the target of the attack
+
+                        //This is code for if it will target a weak planet. The %2 is basically to nerf it so it doesn't got after weak planets all the time
+                        if(target % 2 == 0)
+                        {
+                            for (int j = 0; j < buildings.Count; j++)
+                            {
+                                if (buildings[j].Alignment != "E" && buildings[j].NumUnits <= buildings[i].NumUnits / 2) //If it can claim a new planet it does and then it stops the for loop
+                                {
+                                    target = j;
+                                    j += 9000;
+                                }
+                            }
+                        }
+                        else if(target % 3 == 0)
+                        {
+                            while(buildings[target].Alignment == "E") //Goal of this is to stop is from reinforcing itself a while bunch
+                            {
+                                target = (int)Random.Range(0, buildings.Count);
+                            }
+                        }
+
                         //Debug.Log(target);
 
                         while (target == i) //This ensures that it will not target itself

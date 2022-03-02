@@ -44,8 +44,8 @@ public class EnemyManager : MonoBehaviour
                         int target;
                         target = (int)Random.Range(0, buildings.Count); //This is for the target of the attack
 
-                        //This is code for if it will target a weak planet. The %2 is basically to nerf it so it doesn't got after weak planets all the time
-                        if(target % 2 == 0)
+                        //This is code for if it will target a weak planet. The %3 != 0 is basically to nerf it so it only has a 2/3 chance of going after a weak planet
+                        if(randomNum % 3 != 0)
                         {
                             for (int j = 0; j < buildings.Count; j++)
                             {
@@ -56,17 +56,10 @@ public class EnemyManager : MonoBehaviour
                                 }
                             }
                         }
-                        else if(target % 3 == 0)
-                        {
-                            while(buildings[target].Alignment == "E") //Goal of this is to stop is from reinforcing itself a while bunch
-                            {
-                                target = (int)Random.Range(0, buildings.Count);
-                            }
-                        }
 
                         //Debug.Log(target);
 
-                        while (target == i) //This ensures that it will not target itself
+                        while (target == i || (buildings[target].Alignment == "E" && buildings[target].NumUnits + (buildings[i].NumUnits / 2) >= 45)) //This ensures that it will not target itself or allies that have too high of a unit count
                         {
                             target = (int)Random.Range(0, buildings.Count);
                             //Debug.Log(target);

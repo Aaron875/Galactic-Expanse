@@ -59,7 +59,8 @@ public class GameManager : MonoBehaviour
 
         if(isTutorialActive)
         {
-            if (buildings[2].Alignment == "P" && isPaused)
+            if (buildings[2].Alignment == "P" && isPaused ||
+                buildings[3].Alignment == "P" && isPaused)
             {
                 tutorialStep1.SetActive(false);
                 tutorialStep2.SetActive(true);

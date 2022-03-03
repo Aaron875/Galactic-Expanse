@@ -37,14 +37,29 @@ public class EnemyManager : MonoBehaviour
                 //Change number to change how quickly buildings gain units
                 if (timer >= 2)
                 {
-                    randomNum = Random.Range(0, 750); //1000 is just randomly there, can be changed
+                    randomNum = Random.Range(0, 600); //600 is just randomly there, can be changed
                     if (randomNum < buildings[i].NumUnits || buildings[i].NumUnits >= 50) //If the number is less than the unit count it attacks, more aggressive the more units it has
                     {
 
-                        int target = (int)Random.Range(0, buildings.Count); //This is for the target of the attack
+                        int target;
+                        target = (int)Random.Range(0, buildings.Count); //This is for the target of the attack
+
+                        //This is code for if it will target a weak planet. The %3 != 0 is basically to nerf it so it only has a 2/3 chance of going after a weak planet
+                        if(randomNum % 3 != 0)
+                        {
+                            for (int j = 0; j < buildings.Count; j++)
+                            {
+                                if (buildings[j].Alignment != "E" && buildings[j].NumUnits <= buildings[i].NumUnits / 2) //If it can claim a new planet it does and then it stops the for loop
+                                {
+                                    target = j;
+                                    j += 9000;
+                                }
+                            }
+                        }
+
                         //Debug.Log(target);
 
-                        while (target == i) //This ensures that it will not target itself
+                        while (target == i || (buildings[target].Alignment == "E" && buildings[target].NumUnits + (buildings[i].NumUnits / 2) >= 45)) //This ensures that it will not target itself or allies that have too high of a unit count
                         {
                             target = (int)Random.Range(0, buildings.Count);
                             //Debug.Log(target);

@@ -8,7 +8,7 @@ public class SceneChanger : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene("Game"); // This will change once galaxy map is implemented
+        SceneManager.LoadScene("Galaxy Map"); // This will change once galaxy map is implemented
     }
 
     public void StartTutorial()

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,8 +13,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool isTutorialActive = false;
     [SerializeField] private bool isPaused = false;
 
+    [SerializeField] private float basicUnitProdRate = 2;
+
     // Managers
     private EnemyManager enemyManager;
+    private SquadManager squadManager;
     private BuildingMgr buildingManager;
 
     // Tutorial Objects
@@ -21,17 +25,22 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject tutorialStep2;
 
     [SerializeField] private GameObject replayButton;
+    [SerializeField] private Text replayButtonText;
+    //private Text replayButtonText;
 
     // Start is called before the first frame update
     void Start()
     {
         enemyManager = GetComponent<EnemyManager>();
+        squadManager = GetComponent<SquadManager>();
         buildings = GetComponent<BuildingMgr>().Buildings;
         Debug.Log(buildings.Count);
 
+        //replayButtonText = replayButton.GetComponent<Text>();
+
         if (SceneManager.GetActiveScene().name == "Tutorial")
         {
-            isPaused = true;
+            isPaused = false;
             isTutorialActive = true;
             tutorialStep1.SetActive(true);
             tutorialStep2.SetActive(false);
@@ -45,29 +54,36 @@ public class GameManager : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        //Change number to change how quickly buildings gain units
-        if(timer >= 2)
-        {
-            UpdateBases();
-            timer = 0;
-        }
-
         if(!isPaused)
         {
-            enemyManager.UpdateAI();
+            //Change number to change how quickly buildings gain units
+            if (timer >= basicUnitProdRate)
+            {
+                UpdateBases();
+                timer = 0;
+            }
+
+            if(isTutorialActive && tutorialStep2.activeInHierarchy)
+            {
+                enemyManager.UpdateAI();
+            }
+            else if(!isTutorialActive)
+            {
+                enemyManager.UpdateAI();
+            }
         }
 
         if(isTutorialActive)
         {
-            if (buildings[2].Alignment == "P" && isPaused ||
-                buildings[3].Alignment == "P" && isPaused)
+            if ((buildings[2].Alignment == "P" || buildings[3].Alignment == "P") &&
+                tutorialStep1.activeInHierarchy)
             {
                 tutorialStep1.SetActive(false);
                 tutorialStep2.SetActive(true);
-                isPaused = false;
 
-                buildings[1].NumUnits = 40;
-                buildings[2].NumUnits = 40;
+               /* buildings[1].NumUnits = 40;
+                buildings[2].NumUnits = 30;
+                buildings[3].NumUnits = 30;*/
             }
 
             if(tutorialStep2.activeInHierarchy && buildings[0].Alignment == "P")
@@ -77,6 +93,14 @@ public class GameManager : MonoBehaviour
         }
 
         CheckWinState();
+    }
+
+    private void LateUpdate()
+    {
+        if(!isPaused)
+        {
+            squadManager.UpdateSquads();
+        }
     }
 
     void UpdateBases()
@@ -127,6 +151,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 isPaused = true;
+                replayButtonText.text = "Victory!\n" + "Back to galaxy map!";
                 replayButton.SetActive(true);
             }
         }
@@ -137,6 +162,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 isPaused = true;
+                replayButtonText.text = "Defeat!\n" + "Back to galaxy map!";
                 replayButton.SetActive(true);
             }
         }

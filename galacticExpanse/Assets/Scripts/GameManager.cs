@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "Tutorial")
         {
-            isPaused = true;
+            isPaused = false;
             isTutorialActive = true;
             tutorialStep1.SetActive(true);
             tutorialStep2.SetActive(false);
@@ -63,20 +63,27 @@ public class GameManager : MonoBehaviour
                 timer = 0;
             }
 
-            enemyManager.UpdateAI();
+            if(isTutorialActive && tutorialStep2.activeInHierarchy)
+            {
+                enemyManager.UpdateAI();
+            }
+            else if(!isTutorialActive)
+            {
+                enemyManager.UpdateAI();
+            }
         }
 
         if(isTutorialActive)
         {
-            if (buildings[2].Alignment == "P" && isPaused ||
-                buildings[3].Alignment == "P" && isPaused)
+            if ((buildings[2].Alignment == "P" || buildings[3].Alignment == "P") &&
+                tutorialStep1.activeInHierarchy)
             {
                 tutorialStep1.SetActive(false);
                 tutorialStep2.SetActive(true);
-                isPaused = false;
 
-                buildings[1].NumUnits = 40;
-                buildings[2].NumUnits = 40;
+               /* buildings[1].NumUnits = 40;
+                buildings[2].NumUnits = 30;
+                buildings[3].NumUnits = 30;*/
             }
 
             if(tutorialStep2.activeInHierarchy && buildings[0].Alignment == "P")

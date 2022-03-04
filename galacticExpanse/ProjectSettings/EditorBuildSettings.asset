@@ -9,6 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 089a9d43778c96a40bf5daf0b02bdca4
+  - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 861ddf2fb6f96df4d9872f162fe00dbe
+  - enabled: 1
+    path: Assets/Scenes/DevScenes/Galaxy Map.unity
+    guid: c1359544360570340b2e65e8e004a605
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 8a25699466c603748bfe805df984c83c
   m_configObjects: {}

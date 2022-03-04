@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject tutorialStep1;
     [SerializeField] private GameObject tutorialStep2;
 
-    [SerializeField] private GameObject replayButton;
+    [SerializeField] private Button replayButton;
     [SerializeField] private Text replayButtonText;
     //private Text replayButtonText;
 
@@ -146,24 +146,35 @@ public class GameManager : MonoBehaviour
         // Ends the game and either exits the tutorial or shows the replay button
         if(playerBuildings == buildings.Count - neutralBuildings)
         {
-            if(isTutorialActive)
-                SceneManager.LoadScene("Game");
+            isPaused = true;
+
+            if (isTutorialActive)
+            {
+                replayButtonText.text = "Victory!\n" + "To the galaxy map!";
+                //replayButton.onClick.AddListener(delegate { SceneManager.LoadScene("Galaxy Map"); });
+                replayButton.gameObject.SetActive(true);
+
+            }
             else
             {
                 isPaused = true;
                 replayButtonText.text = "Victory!\n" + "Back to galaxy map!";
-                replayButton.SetActive(true);
+                replayButton.gameObject.SetActive(true);
             }
         }
         else if(enemyBuildings == buildings.Count - neutralBuildings)
         {
             if (isTutorialActive)
-                SceneManager.LoadScene("Tutorial");
+            {
+                replayButtonText.text = "Defeat!\n" + "Retry tutorial?";
+                replayButton.onClick.AddListener(ReloadScene);
+                replayButton.gameObject.SetActive(true);
+            }
             else
             {
                 isPaused = true;
                 replayButtonText.text = "Defeat!\n" + "Back to galaxy map!";
-                replayButton.SetActive(true);
+                replayButton.gameObject.SetActive(true);
             }
         }
     }

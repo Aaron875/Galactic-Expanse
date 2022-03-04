@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 34804482}
   - component: {fileID: 34804481}
   - component: {fileID: 34804480}
+  - component: {fileID: 34804483}
   m_Layer: 8
   m_Name: ReplayButton
   m_TagString: Untagged
@@ -206,9 +207,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 123619680}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ReloadScene
+      - m_Target: {fileID: 34804483}
+        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+        m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -256,6 +257,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 34804478}
   m_CullTransparentMesh: 1
+--- !u!114 &34804483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34804478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daf8c32577e3a4349bb3e5d5f2ddc719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &99533692 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4640021598638942840, guid: cb25b85219a29ac4faa5a3acc244bb57, type: 3}
@@ -434,7 +447,7 @@ MonoBehaviour:
   basicUnitProdRate: 2
   tutorialStep1: {fileID: 0}
   tutorialStep2: {fileID: 0}
-  replayButton: {fileID: 34804478}
+  replayButton: {fileID: 34804480}
   replayButtonText: {fileID: 966573954}
 --- !u!4 &123619681
 Transform:

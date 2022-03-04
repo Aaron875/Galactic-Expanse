@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     // Managers
     private EnemyManager enemyManager;
+    private SquadManager squadManager;
     private BuildingMgr buildingManager;
 
     // Tutorial Objects
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         enemyManager = GetComponent<EnemyManager>();
+        squadManager = GetComponent<SquadManager>();
         buildings = GetComponent<BuildingMgr>().Buildings;
         Debug.Log(buildings.Count);
 
@@ -77,6 +79,14 @@ public class GameManager : MonoBehaviour
         }
 
         CheckWinState();
+    }
+
+    private void LateUpdate()
+    {
+        if(!isPaused)
+        {
+            squadManager.UpdateSquads();
+        }
     }
 
     void UpdateBases()

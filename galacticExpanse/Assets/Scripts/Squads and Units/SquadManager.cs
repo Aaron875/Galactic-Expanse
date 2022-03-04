@@ -54,10 +54,10 @@ public class SquadManager : MonoBehaviour
             CreateSquad(1, 0, 5, Camera.main.ScreenToWorldPoint(Input.mousePosition), targetTower.transform.position);
         }*/
 
-        UpdateSquads();
+        //UpdateSquads();
     }
 
-    private void UpdateSquads()
+    public void UpdateSquads()
     {
         // Update player squads
         foreach(Squad squad in playerSquads)

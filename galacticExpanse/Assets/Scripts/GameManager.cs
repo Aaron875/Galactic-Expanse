@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject tutorialStep2;
 
     [SerializeField] private GameObject replayButton;
+    [SerializeField] private Text replayButtonText;
+    //private Text replayButtonText;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +35,8 @@ public class GameManager : MonoBehaviour
         squadManager = GetComponent<SquadManager>();
         buildings = GetComponent<BuildingMgr>().Buildings;
         Debug.Log(buildings.Count);
+
+        //replayButtonText = replayButton.GetComponent<Text>();
 
         if (SceneManager.GetActiveScene().name == "Tutorial")
         {
@@ -139,6 +144,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 isPaused = true;
+                replayButtonText.text = "Victory!\n" + "Back to galaxy map!";
                 replayButton.SetActive(true);
             }
         }
@@ -149,6 +155,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 isPaused = true;
+                replayButtonText.text = "Defeat!\n" + "Back to galaxy map!";
                 replayButton.SetActive(true);
             }
         }

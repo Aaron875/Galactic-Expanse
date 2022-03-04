@@ -431,9 +431,11 @@ MonoBehaviour:
   eStart: {fileID: 0}
   isTutorialActive: 0
   isPaused: 0
+  basicUnitProdRate: 2
   tutorialStep1: {fileID: 0}
   tutorialStep2: {fileID: 0}
   replayButton: {fileID: 34804478}
+  replayButtonText: {fileID: 966573954}
 --- !u!4 &123619681
 Transform:
   m_ObjectHideFlags: 0

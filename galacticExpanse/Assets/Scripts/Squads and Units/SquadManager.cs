@@ -41,22 +41,6 @@ public class SquadManager : MonoBehaviour
         enemySquads = new List<Squad>();
     }
 
-    private void LateUpdate()
-    {
-        // Debug spawing squads
-/*        if(Input.GetMouseButtonDown(0))
-        {
-            CreateSquad(0, 0, 5, Camera.main.ScreenToWorldPoint(Input.mousePosition), targetTower.transform.position);
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            CreateSquad(1, 0, 5, Camera.main.ScreenToWorldPoint(Input.mousePosition), targetTower.transform.position);
-        }*/
-
-        //UpdateSquads();
-    }
-
     public void UpdateSquads()
     {
         // Update player squads
@@ -121,35 +105,38 @@ public class SquadManager : MonoBehaviour
     /// <param name="_targetLocation"></param>
     public void CreateSquad(int _team, int _unitType, int _numUnits, Vector2 _startLocation, Building _targetLocation)
     {
-        GameObject newSquad;
-
-        // Set the prefab
-        if (_team == 0)
+        if(_numUnits > 0)
         {
-            newSquad = Instantiate(playerSquadPrefab, _startLocation, Quaternion.identity);
+            GameObject newSquad;
+
+            // Set the prefab
+            if (_team == 0)
+            {
+                newSquad = Instantiate(playerSquadPrefab, _startLocation, Quaternion.identity);
+            }
+            else
+            {
+                newSquad = Instantiate(enemySquadPrefab, _startLocation, Quaternion.identity);
+            }
+
+            // Set the script info
+            Squad newSquadScript = newSquad.GetComponent<Squad>();
+
+            newSquadScript.NumUnits = _numUnits;
+            newSquadScript.TargetLocation = _targetLocation;
+            newSquad.transform.up = _targetLocation.transform.position - newSquad.transform.position;
+
+            // Assign the team
+            if (_team == 0)
+            {
+                newSquadScript.Team = "P";
+                playerSquads.Add(newSquadScript);
+                return;
+            }
+
+            newSquadScript.Team = "E";
+            enemySquads.Add(newSquadScript);
         }
-        else
-        {
-            newSquad = Instantiate(enemySquadPrefab, _startLocation, Quaternion.identity);
-        }
-
-        // Set the script info
-        Squad newSquadScript = newSquad.GetComponent<Squad>();
-
-        newSquadScript.NumUnits = _numUnits;
-        newSquadScript.TargetLocation = _targetLocation;
-        newSquad.transform.up = _targetLocation.transform.position - newSquad.transform.position;
-
-        // Assign the team
-        if (_team == 0)
-        {
-            newSquadScript.Team = "P";
-            playerSquads.Add(newSquadScript);
-            return;
-        }
-
-        newSquadScript.Team = "E";
-        enemySquads.Add(newSquadScript);
     }
 
     #endregion

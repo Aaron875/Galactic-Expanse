@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool isTutorialActive = false;
     [SerializeField] private bool isPaused = false;
 
+    [SerializeField] private float basicUnitProdRate = 2;
+
     // Managers
     private EnemyManager enemyManager;
     private SquadManager squadManager;
@@ -47,15 +49,15 @@ public class GameManager : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        //Change number to change how quickly buildings gain units
-        if(timer >= 2)
-        {
-            UpdateBases();
-            timer = 0;
-        }
-
         if(!isPaused)
         {
+            //Change number to change how quickly buildings gain units
+            if (timer >= basicUnitProdRate)
+            {
+                UpdateBases();
+                timer = 0;
+            }
+
             enemyManager.UpdateAI();
         }
 

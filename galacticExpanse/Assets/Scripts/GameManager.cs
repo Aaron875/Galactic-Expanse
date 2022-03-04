@@ -146,14 +146,4 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
-    public void StartGame()
-    {
-        SceneManager.LoadScene("Game"); // This will change once galaxy map is implemented
-    }
-
-    public void StartTutorial()
-    {
-        SceneManager.LoadScene("Tutorial"); // This will change once galaxy map is implemented
-    }
 }

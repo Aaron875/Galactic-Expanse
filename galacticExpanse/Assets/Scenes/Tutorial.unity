@@ -245,6 +245,7 @@ MonoBehaviour:
   tutorialStep1: {fileID: 294088059}
   tutorialStep2: {fileID: 1181673331}
   replayButton: {fileID: 0}
+  replayButtonText: {fileID: 0}
 --- !u!4 &123619681
 Transform:
   m_ObjectHideFlags: 0
@@ -2032,7 +2033,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4644773415547759740, guid: c93d610bfa53cbe419ce4d9a518e0d1b, type: 3}
       propertyPath: numUnits
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4644773415547759740, guid: c93d610bfa53cbe419ce4d9a518e0d1b, type: 3}
       propertyPath: unitText

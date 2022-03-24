@@ -1412,7 +1412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   squadManager: {fileID: 123619684}
-  gameManager: {fileID: 0}
+  gameManager: {fileID: 123619680}
   draggableMask:
     serializedVersion: 2
     m_Bits: 64

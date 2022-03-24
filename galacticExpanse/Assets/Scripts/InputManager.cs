@@ -100,6 +100,15 @@ public class InputManager : MonoBehaviour
             selectedObject2 = hit.collider.gameObject;
             targetLocation = selectedObject2.GetComponent<Building>();
         }
+
+        // hit detection for friendly planet (quick and dirty reinforcement of player planets)
+        hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, draggableMask);
+        if (hit.collider != null)
+        {
+            //Debug.Log(hit.collider.gameObject.name);
+            selectedObject2 = hit.collider.gameObject;
+            targetLocation = selectedObject2.GetComponent<Building>();
+        }
     }
 
     private void Attack(Building _startLocation, Building _targetLocation)

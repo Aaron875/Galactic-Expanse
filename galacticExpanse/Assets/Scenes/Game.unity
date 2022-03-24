@@ -444,7 +444,9 @@ MonoBehaviour:
   eStart: {fileID: 0}
   isTutorialActive: 0
   isPaused: 0
-  basicUnitProdRate: 2
+  basicUnitProdTimer: 1
+  basicUnitProdRate: 1
+  currentTimeMultiplier: 1
   tutorialStep1: {fileID: 0}
   tutorialStep2: {fileID: 0}
   replayButton: {fileID: 34804480}
@@ -523,6 +525,7 @@ MonoBehaviour:
   playerSquads: []
   enemySquads: []
   distanceToAttack: 0
+  gameManager: {fileID: 0}
   targetTower: {fileID: 0}
 --- !u!1001 &170379395
 PrefabInstance:
@@ -1409,6 +1412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   squadManager: {fileID: 123619684}
+  gameManager: {fileID: 0}
   draggableMask:
     serializedVersion: 2
     m_Bits: 64

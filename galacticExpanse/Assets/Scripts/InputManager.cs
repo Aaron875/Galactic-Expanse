@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class InputManager : MonoBehaviour
 {
     [SerializeField] private SquadManager squadManager;
+    [SerializeField] private GameManager gameManager;
     private Building startLocation;
     private Building targetLocation;
 
@@ -24,12 +25,15 @@ public class InputManager : MonoBehaviour
     void Start()
     {
         //squadManager = GetComponent<SquadManager>();
+        //gameManager = GetComponent<GameManager>();
         isDragging = false;
         lr = GetComponent<LineRenderer>();
         lr.positionCount = 2;
     }
     void Update()
     {
+        UpdateTimeMultiplier();
+
         // Called when left mouse click is held down
         if (Input.GetMouseButtonDown(0))
         {
@@ -118,5 +122,28 @@ public class InputManager : MonoBehaviour
     {
         lr.positionCount = points.Length;
         this.points = points;
+    }
+
+    private void UpdateTimeMultiplier()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            gameManager.CurrentTimeMultiplier = 0;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            gameManager.CurrentTimeMultiplier = 1;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            gameManager.CurrentTimeMultiplier = 2;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            gameManager.CurrentTimeMultiplier = 3;
+        }
     }
 }

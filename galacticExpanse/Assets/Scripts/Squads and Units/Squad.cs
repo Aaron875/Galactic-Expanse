@@ -62,14 +62,14 @@ public class Squad : MonoBehaviour
         tempTextBox.text = displayUnits;
     }
 
-    public void UpdateSquad()
+    public void UpdateSquad(int _currentTimeMultiplier)
     {
         //Debug.Log("Updating position...");
   
         tempTextBox.rectTransform.position = new Vector3(transform.position.x, transform.position.y, 0.0f);
         //Debug.Log(tempTextBox);
         
-        transform.position = Vector2.MoveTowards(transform.position, targetLocation.gameObject.transform.position, Time.deltaTime * speed);
+        transform.position = Vector2.MoveTowards(transform.position, targetLocation.gameObject.transform.position, Time.deltaTime * speed * _currentTimeMultiplier);
         
     }
 }

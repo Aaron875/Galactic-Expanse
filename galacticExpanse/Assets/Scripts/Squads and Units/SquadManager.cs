@@ -12,6 +12,7 @@ public class SquadManager : MonoBehaviour
     [SerializeField] private List<Squad> enemySquads;
     private List<Squad> squadsToRemove;
     [SerializeField] private float distanceToAttack;
+    [SerializeField] private GameManager gameManager;
 
     [Header("Debug Values")]
     [SerializeField] private GameObject targetTower;
@@ -36,6 +37,8 @@ public class SquadManager : MonoBehaviour
 
     private void Start()
     {
+        gameManager = GetComponent<GameManager>();
+
         squadsToRemove = new List<Squad>();
         playerSquads = new List<Squad>();
         enemySquads = new List<Squad>();
@@ -46,7 +49,7 @@ public class SquadManager : MonoBehaviour
         // Update player squads
         foreach(Squad squad in playerSquads)
         {
-            squad.UpdateSquad();
+            squad.UpdateSquad(gameManager.CurrentTimeMultiplier);
 
             if (Vector2.Distance(squad.transform.position, squad.TargetLocation.transform.position) <= distanceToAttack)
             {
@@ -69,7 +72,7 @@ public class SquadManager : MonoBehaviour
         // Update enemy squads
         foreach(Squad squad in enemySquads)
         {
-            squad.UpdateSquad();
+            squad.UpdateSquad(gameManager.CurrentTimeMultiplier);
 
             if (Vector2.Distance(squad.transform.position, squad.TargetLocation.transform.position) <= distanceToAttack)
             {

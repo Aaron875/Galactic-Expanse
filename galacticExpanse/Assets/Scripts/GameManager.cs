@@ -13,7 +13,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool isTutorialActive = false;
     [SerializeField] private bool isPaused = false;
 
-    [SerializeField] private float basicUnitProdRate = 2;
+    [SerializeField] private float basicUnitProdTimer = 2;
+    [SerializeField] private int basicUnitProdRate = 1;
+
+    [SerializeField] private int currentTimeMultiplier = 1;
 
     // Managers
     private EnemyManager enemyManager;
@@ -27,6 +30,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Button replayButton;
     [SerializeField] private Text replayButtonText;
     //private Text replayButtonText;
+
+    public int CurrentTimeMultiplier
+    {
+        get { return currentTimeMultiplier; }
+        set { currentTimeMultiplier = value; }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -57,7 +66,7 @@ public class GameManager : MonoBehaviour
         if(!isPaused)
         {
             //Change number to change how quickly buildings gain units
-            if (timer >= basicUnitProdRate)
+            if ((timer * currentTimeMultiplier) >= basicUnitProdTimer)
             {
                 UpdateBases();
                 timer = 0;
@@ -114,7 +123,7 @@ public class GameManager : MonoBehaviour
                     buildings[i].Alignment == "E" &&
                     tutorialStep1.activeInHierarchy) continue;
 
-                buildings[i].NumUnits += 1;
+                buildings[i].NumUnits += basicUnitProdRate;
             }
         }
     }

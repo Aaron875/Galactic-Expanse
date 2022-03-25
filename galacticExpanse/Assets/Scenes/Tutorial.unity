@@ -147,6 +147,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4644773415547759740, guid: c93d610bfa53cbe419ce4d9a518e0d1b, type: 3}
+      propertyPath: type
+      value: Normal
+      objectReference: {fileID: 0}
+    - target: {fileID: 4644773415547759740, guid: c93d610bfa53cbe419ce4d9a518e0d1b, type: 3}
       propertyPath: unitText
       value: 
       objectReference: {fileID: 321326699}
@@ -241,7 +245,9 @@ MonoBehaviour:
   eStart: {fileID: 0}
   isTutorialActive: 0
   isPaused: 1
+  basicUnitProdTimer: 2
   basicUnitProdRate: 2
+  currentTimeMultiplier: 1
   tutorialStep1: {fileID: 294088059}
   tutorialStep2: {fileID: 1181673331}
   replayButton: {fileID: 148561358}
@@ -272,8 +278,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653388c1bbbc4164babe5db1a3cdba20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSprite: {fileID: 21300000, guid: 65688cd761f6d524d85a1890139563d0, type: 3}
-  enemySprite: {fileID: 21300000, guid: 9c36c5cd75ed3e04da7144bd01430bf2, type: 3}
+  normalPlayerSprite: {fileID: 0}
+  normalEnemySprite: {fileID: 0}
+  interceptorPlayerSprite: {fileID: 0}
+  interceptorEnemySprite: {fileID: 0}
   buildings:
   - {fileID: 1088591994}
   - {fileID: 241193518}
@@ -310,10 +318,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSquadPrefab: {fileID: 8472905053875474509, guid: 5e4caf5f9b711c04ba70e8c5ee69a0f1, type: 3}
+  playerInterceptorPrefab: {fileID: 0}
   enemySquadPrefab: {fileID: 8472905053875474509, guid: 34066cee67f642246abd03b4a79d1a45, type: 3}
+  enemyInterceptorPrefab: {fileID: 0}
   playerSquads: []
   enemySquads: []
   distanceToAttack: 0
+  gameManager: {fileID: 0}
   targetTower: {fileID: 0}
 --- !u!1 &148561356
 GameObject:
@@ -1329,6 +1340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   squadManager: {fileID: 123619684}
+  gameManager: {fileID: 0}
   draggableMask:
     serializedVersion: 2
     m_Bits: 64
@@ -1798,6 +1810,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4644773415547759740, guid: c93d610bfa53cbe419ce4d9a518e0d1b, type: 3}
+      propertyPath: type
+      value: Normal
+      objectReference: {fileID: 0}
     - target: {fileID: 4644773415547759740, guid: c93d610bfa53cbe419ce4d9a518e0d1b, type: 3}
       propertyPath: numUnits
       value: 40
@@ -2278,6 +2294,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4644773415547759740, guid: c93d610bfa53cbe419ce4d9a518e0d1b, type: 3}
+      propertyPath: type
+      value: Normal
+      objectReference: {fileID: 0}
+    - target: {fileID: 4644773415547759740, guid: c93d610bfa53cbe419ce4d9a518e0d1b, type: 3}
       propertyPath: numUnits
       value: 20
       objectReference: {fileID: 0}
@@ -2366,6 +2386,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4644773415547759740, guid: c93d610bfa53cbe419ce4d9a518e0d1b, type: 3}
+      propertyPath: type
+      value: Normal
+      objectReference: {fileID: 0}
     - target: {fileID: 4644773415547759740, guid: c93d610bfa53cbe419ce4d9a518e0d1b, type: 3}
       propertyPath: unitText
       value: 

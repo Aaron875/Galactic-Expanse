@@ -262,6 +262,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numUnits: 0
-  speed: 45
+  speed: 60
   targetLocation: {fileID: 0}
   team: 

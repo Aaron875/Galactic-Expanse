@@ -7,7 +7,9 @@ public class SquadManager : MonoBehaviour
     #region Variables
 
     [SerializeField] private GameObject playerSquadPrefab;
+    [SerializeField] private GameObject playerInterceptorPrefab;
     [SerializeField] private GameObject enemySquadPrefab;
+    [SerializeField] private GameObject enemyInterceptorPrefab;
     [SerializeField] private List<Squad> playerSquads;
     [SerializeField] private List<Squad> enemySquads;
     private List<Squad> squadsToRemove;
@@ -106,20 +108,39 @@ public class SquadManager : MonoBehaviour
     /// <param name="_numUnits"></param>
     /// <param name="_startLocation"></param>
     /// <param name="_targetLocation"></param>
-    public void CreateSquad(int _team, int _unitType, int _numUnits, Vector2 _startLocation, Building _targetLocation)
+    public void CreateSquad(int _numUnits, Building _startLocation, Building _targetLocation)
     {
         if(_numUnits > 0)
         {
+            string team = _startLocation.Alignment;
+            string unitType = _startLocation.Type;
+
+
             GameObject newSquad;
 
             // Set the prefab
-            if (_team == 0)
+            if (team == "P")
             {
-                newSquad = Instantiate(playerSquadPrefab, _startLocation, Quaternion.identity);
+                // Check unit types. defaults to basic squad
+                if(unitType == "Interceptor")
+                {
+                    newSquad = Instantiate(playerInterceptorPrefab, _startLocation.transform.position, Quaternion.identity);
+                }
+                else
+                {
+                    newSquad = Instantiate(playerSquadPrefab, _startLocation.transform.position, Quaternion.identity);
+                }
             }
             else
             {
-                newSquad = Instantiate(enemySquadPrefab, _startLocation, Quaternion.identity);
+                if (unitType == "Interceptor")
+                {
+                    newSquad = Instantiate(enemyInterceptorPrefab, _startLocation.transform.position, Quaternion.identity);
+                }
+                else
+                {
+                    newSquad = Instantiate(enemySquadPrefab, _startLocation.transform.position, Quaternion.identity);
+                }
             }
 
             // Set the script info
@@ -130,7 +151,7 @@ public class SquadManager : MonoBehaviour
             newSquad.transform.up = _targetLocation.transform.position - newSquad.transform.position;
 
             // Assign the team
-            if (_team == 0)
+            if (team == "P")
             {
                 newSquadScript.Team = "P";
                 playerSquads.Add(newSquadScript);

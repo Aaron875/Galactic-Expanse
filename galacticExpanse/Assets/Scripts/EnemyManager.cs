@@ -69,12 +69,12 @@ public class EnemyManager : MonoBehaviour
                         if (buildings[i].NumUnits % 2 == 0)
                         {
                             buildings[i].NumUnits = buildings[i].NumUnits / 2;
-                            squadManager.CreateSquad(1, 0, buildings[i].NumUnits, buildings[i].transform.position, buildings[target]);
+                            squadManager.CreateSquad(buildings[i].NumUnits, buildings[i], buildings[target]);
                         }
                         else
                         {
                             buildings[i].NumUnits = buildings[i].NumUnits / 2;
-                            squadManager.CreateSquad(1, 0, buildings[i].NumUnits, buildings[i].transform.position, buildings[target]);
+                            squadManager.CreateSquad(buildings[i].NumUnits, buildings[i], buildings[target]);
                             buildings[i].NumUnits++;
                         }
 

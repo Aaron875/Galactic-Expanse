@@ -113,16 +113,18 @@ public class InputManager : MonoBehaviour
 
     private void Attack(Building _startLocation, Building _targetLocation)
     {
+        // public void CreateSquad(int _numUnits, Building _startLocation, Building _targetLocation)
+
         //This makes sure that the unit numbers will not be weird if it has an odd number
         if (_startLocation.NumUnits % 2 == 0)
         {
             _startLocation.NumUnits = _startLocation.NumUnits / 2;
-            squadManager.CreateSquad(0, 0, _startLocation.NumUnits, _startLocation.transform.position, _targetLocation);
+            squadManager.CreateSquad(_startLocation.NumUnits, _startLocation, _targetLocation);
         }
         else
         {
             _startLocation.NumUnits = _startLocation.NumUnits / 2;
-            squadManager.CreateSquad(0, 0, _startLocation.NumUnits, _startLocation.transform.position, _targetLocation);
+            squadManager.CreateSquad(_startLocation.NumUnits, _startLocation, _targetLocation);
             _startLocation.NumUnits++;
         }
     }

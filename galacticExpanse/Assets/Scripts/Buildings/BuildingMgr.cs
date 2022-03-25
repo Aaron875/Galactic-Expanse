@@ -5,8 +5,10 @@ using UnityEngine;
 public class BuildingMgr : MonoBehaviour
 {
 
-    [SerializeField] private Sprite playerSprite;
-    [SerializeField] private Sprite enemySprite;
+    [SerializeField] private Sprite normalPlayerSprite;
+    [SerializeField] private Sprite normalEnemySprite;
+    [SerializeField] private Sprite interceptorPlayerSprite;
+    [SerializeField] private Sprite interceptorEnemySprite;
     [SerializeField] private List<Building> buildings;
     [SerializeField] private List<GameObject> buildingsForLayer;
 
@@ -21,18 +23,36 @@ public class BuildingMgr : MonoBehaviour
         //when the alignment of a building changes the buildings sprite will change to who ever now controls it
         for (int i = 0; i < buildings.Count; i++)
         {
-            if (buildings[i].SpriteRenderer.sprite != playerSprite && 
-                buildings[i].Alignment == "P")
+            if (buildings[i].SpriteRenderer.sprite != normalPlayerSprite && 
+                buildings[i].Alignment == "P" && buildings[i].Type == "Normal")
             {
-                buildings[i].SpriteRenderer.sprite = playerSprite;
+                buildings[i].SpriteRenderer.sprite = normalPlayerSprite;
 
                 buildingsForLayer[i].layer = 6;
                 buildings[i].SpriteRenderer.sortingOrder = 1;
             }
-            else if (buildings[i].SpriteRenderer.sprite != enemySprite &&
-                    buildings[i].Alignment == "E")
+            else if (buildings[i].SpriteRenderer.sprite != normalEnemySprite &&
+                    buildings[i].Alignment == "E" && buildings[i].Type == "Normal")
             {
-                buildings[i].SpriteRenderer.sprite = enemySprite;
+                buildings[i].SpriteRenderer.sprite = normalEnemySprite;
+                if (buildingsForLayer[i].layer == 6)
+                {
+                    buildingsForLayer[i].layer = 7;
+                    buildings[i].SpriteRenderer.sortingOrder = 0;
+                }
+            }
+            else if (buildings[i].SpriteRenderer.sprite != interceptorPlayerSprite &&
+                    buildings[i].Alignment == "P" && buildings[i].Type == "Interceptor")
+            {
+                buildings[i].SpriteRenderer.sprite = interceptorPlayerSprite;
+
+                buildingsForLayer[i].layer = 6;
+                buildings[i].SpriteRenderer.sortingOrder = 1;
+            }
+            else if (buildings[i].SpriteRenderer.sprite != interceptorEnemySprite &&
+                    buildings[i].Alignment == "E" && buildings[i].Type == "Interceptor")
+            {
+                buildings[i].SpriteRenderer.sprite = interceptorEnemySprite;
                 if (buildingsForLayer[i].layer == 6)
                 {
                     buildingsForLayer[i].layer = 7;

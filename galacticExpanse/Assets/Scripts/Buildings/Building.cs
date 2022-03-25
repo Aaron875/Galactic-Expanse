@@ -39,13 +39,13 @@ public class Building : MonoBehaviour
         get { return displayUnits; }
     }
 
-    void Start()
+    private void Start()
     {
         displayUnits = numUnits.ToString();
         unitText.text = displayUnits;
     }
 
-    void Update()
+    private void Update()
     {
         displayUnits = numUnits.ToString();
         unitText.text = displayUnits;

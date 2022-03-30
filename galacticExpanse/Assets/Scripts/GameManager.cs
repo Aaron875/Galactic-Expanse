@@ -125,6 +125,11 @@ public class GameManager : MonoBehaviour
 
                 buildings[i].NumUnits += basicUnitProdRate;
             }
+            
+            if (buildings[i].NumUnits > 50)
+            {
+                buildings[i].NumUnits = 50;
+            }
         }
     }
 

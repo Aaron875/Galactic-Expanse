@@ -56,6 +56,9 @@ public class Building_Turret : Building
         base.Update();
     }
 
+    /// <summary>
+    /// Removes any destoryed projectiles from the list.
+    /// </summary>
     private void CleanupProjectiles()
     {
         List<Projectile> projectilesToRemove = new List<Projectile>();
@@ -74,6 +77,10 @@ public class Building_Turret : Building
         }
     }
 
+    /// <summary>
+    /// Fires a projectile at the target
+    /// </summary>
+    /// <param name="_target"></param>
     private void Fire(Squad _target)
     {
         turretBase.transform.up = (_target.transform.position - transform.position);
@@ -91,6 +98,9 @@ public class Building_Turret : Building
         }
     }
 
+    /// <summary>
+    /// Checks if there is a target within range of the turret. If so, fires upon it.
+    /// </summary>
     private void CheckForTargets()
     {
         List<Squad> potentialTargets = new List<Squad>();
@@ -105,6 +115,7 @@ public class Building_Turret : Building
         }
 
 
+        // Finding the closest target
         Squad target = null;
 
         foreach(Squad squad in potentialTargets)
@@ -128,5 +139,11 @@ public class Building_Turret : Building
         {
             Fire(target);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, range);
     }
 }

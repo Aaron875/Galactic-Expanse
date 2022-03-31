@@ -5,7 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private Squad target;
-    [SerializeField] private float speed = 80;
+    [SerializeField] private float speed = 60;
     [SerializeField] private int damage = 2;
     [SerializeField] private GameObject explosionGO;
 

@@ -1073,11 +1073,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 913051590395782862, guid: 12e17125963f2c941b525d1997c0aabf, type: 3}
       propertyPath: range
-      value: 300
+      value: 225
       objectReference: {fileID: 0}
     - target: {fileID: 913051590395782862, guid: 12e17125963f2c941b525d1997c0aabf, type: 3}
       propertyPath: firerate
-      value: 5
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 913051590395782862, guid: 12e17125963f2c941b525d1997c0aabf, type: 3}
       propertyPath: unitText

@@ -139,7 +139,14 @@ public class InputManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            gameManager.CurrentTimeMultiplier = 0;
+            if(gameManager.CurrentTimeMultiplier != 0)
+            {
+                gameManager.CurrentTimeMultiplier = 0;
+            }
+            else
+            {
+                gameManager.CurrentTimeMultiplier = gameManager.PreviousTimeMultiplier;
+            }
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha1))

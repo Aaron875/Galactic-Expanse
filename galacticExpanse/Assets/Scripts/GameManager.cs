@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int basicUnitProdRate = 1;
 
     [SerializeField] private int currentTimeMultiplier = 1;
+    [SerializeField] private int previousTimeMultiplier = 1;
 
     // Managers
     private EnemyManager enemyManager;
@@ -34,7 +35,17 @@ public class GameManager : MonoBehaviour
     public int CurrentTimeMultiplier
     {
         get { return currentTimeMultiplier; }
-        set { currentTimeMultiplier = value; }
+        
+        set 
+        { 
+            previousTimeMultiplier = currentTimeMultiplier;
+            currentTimeMultiplier = value; 
+        }
+    }
+
+    public int PreviousTimeMultiplier
+    {
+        get { return previousTimeMultiplier; }
     }
 
     // Start is called before the first frame update

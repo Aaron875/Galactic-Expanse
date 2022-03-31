@@ -621,7 +621,7 @@ MonoBehaviour:
   squadManager: {fileID: 0}
   turretBase: {fileID: 1189497795194341128}
   turretBarrel: {fileID: 8105913164994239654}
-  projectile: {fileID: 0}
+  projectileGO: {fileID: 1868868844938649089, guid: b352bd8b7abe54d46ac23a152b0e4031, type: 3}
   range: 150
   firerate: 1
   lastFired: 0

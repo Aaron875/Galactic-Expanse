@@ -72,4 +72,10 @@ public class Squad : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, targetLocation.gameObject.transform.position, Time.deltaTime * speed * _currentTimeMultiplier);
         
     }
+
+    public void DamageSquad(int _damage)
+    {
+        numUnits -= _damage;
+        tempTextBox.text = numUnits.ToString();
+    }
 }

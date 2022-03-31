@@ -53,7 +53,8 @@ public class SquadManager : MonoBehaviour
         {
             squad.UpdateSquad(gameManager.CurrentTimeMultiplier);
 
-            if (Vector2.Distance(squad.transform.position, squad.TargetLocation.transform.position) <= distanceToAttack)
+            if (Vector2.Distance(squad.transform.position, squad.TargetLocation.transform.position) <= distanceToAttack
+                || squad.NumUnits <= 0)
             {
                 //DamageTower(squad); // pass in the tower to attack
                 squad.TargetLocation.damageBuilding(squad.NumUnits, squad.Team);
@@ -76,7 +77,8 @@ public class SquadManager : MonoBehaviour
         {
             squad.UpdateSquad(gameManager.CurrentTimeMultiplier);
 
-            if (Vector2.Distance(squad.transform.position, squad.TargetLocation.transform.position) <= distanceToAttack)
+            if (Vector2.Distance(squad.transform.position, squad.TargetLocation.transform.position) <= distanceToAttack
+                || squad.NumUnits <= 0)
             {
                 //DamageTower(squad); // pass in the tower to attack
                 squad.TargetLocation.damageBuilding(squad.NumUnits, squad.Team);

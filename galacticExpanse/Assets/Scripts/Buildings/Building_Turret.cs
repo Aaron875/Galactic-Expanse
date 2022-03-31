@@ -8,9 +8,9 @@ public class Building_Turret : Building
 
     [SerializeField] private GameObject turretBase;
     [SerializeField] private GameObject turretBarrel;
-    [SerializeField] private GameObject projectile;
+    [SerializeField] private GameObject projectileGO;
     [SerializeField] private int range = 150;
-    [SerializeField] private float firerate = 0.5f;
+    [SerializeField] private float firerate = 2.5f;
     [SerializeField] private float lastFired = 0;
 
     // Start is called before the first frame update
@@ -37,7 +37,8 @@ public class Building_Turret : Building
         if(Time.time >= lastFired + firerate)
         {
             Debug.Log("Firing...");
-            //Instantiate(projectile)
+            GameObject firedProjectile = Instantiate(projectileGO, transform.position, Quaternion.identity);
+            firedProjectile.GetComponent<Projectile>().Target = _target;
             lastFired = Time.time;
         }
     }

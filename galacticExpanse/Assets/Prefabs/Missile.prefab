@@ -99,6 +99,7 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 80
   damage: 2
+  explosionGO: {fileID: 848033623275926068, guid: 1ca96b4965cd645498905ef6d18e2383, type: 3}
 --- !u!1 &8246923193809778100
 GameObject:
   m_ObjectHideFlags: 0

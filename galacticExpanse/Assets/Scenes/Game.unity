@@ -1018,7 +1018,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_TargetDisplay: 0
 --- !u!224 &677152372
 RectTransform:
@@ -1072,6 +1072,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 913051590395782862, guid: 12e17125963f2c941b525d1997c0aabf, type: 3}
+      propertyPath: range
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 913051590395782862, guid: 12e17125963f2c941b525d1997c0aabf, type: 3}
       propertyPath: firerate
       value: 2.5
       objectReference: {fileID: 0}
@@ -1081,7 +1085,7 @@ PrefabInstance:
       objectReference: {fileID: 657791957}
     - target: {fileID: 913051590395782862, guid: 12e17125963f2c941b525d1997c0aabf, type: 3}
       propertyPath: alignment
-      value: E
+      value: N
       objectReference: {fileID: 0}
     - target: {fileID: 931835224929658367, guid: 12e17125963f2c941b525d1997c0aabf, type: 3}
       propertyPath: m_FlipX
@@ -2195,6 +2199,10 @@ PrefabInstance:
       value: Normal
       objectReference: {fileID: 0}
     - target: {fileID: 3912428557338213309, guid: dd74d953df001534c8246d774520409a, type: 3}
+      propertyPath: numUnits
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3912428557338213309, guid: dd74d953df001534c8246d774520409a, type: 3}
       propertyPath: unitText
       value: 
       objectReference: {fileID: 321326699}
@@ -2472,6 +2480,10 @@ PrefabInstance:
     - target: {fileID: 708443281408168347, guid: dd74d953df001534c8246d774520409a, type: 3}
       propertyPath: m_Name
       value: Neutral_Planet_BR
+      objectReference: {fileID: 0}
+    - target: {fileID: 3912428557338213309, guid: dd74d953df001534c8246d774520409a, type: 3}
+      propertyPath: numUnits
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 3912428557338213309, guid: dd74d953df001534c8246d774520409a, type: 3}
       propertyPath: unitText

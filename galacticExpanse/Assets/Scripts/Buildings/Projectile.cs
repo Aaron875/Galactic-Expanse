@@ -13,6 +13,11 @@ public class Projectile : MonoBehaviour
     {
         set { target = value; }
     }
+    
+    public int Damage
+    {
+        set { damage = value; }
+    }
 
     public void UpdateProjectile(int _currentTimeManipulation)
     {

@@ -13,7 +13,9 @@ public class Building_Turret : Building
     [SerializeField] private GameObject projectileGO;
     [SerializeField] private int range = 150;
     [SerializeField] private float firerate = 2.5f;
+    [SerializeField] private int damage = 1;
     [SerializeField] private float lastFired = 0;
+    [SerializeField] private float currentTime = 0;
 
     [SerializeField] private List<Projectile> firedProjectiles;
     [SerializeField] private int currentTimeManipulation;
@@ -39,6 +41,7 @@ public class Building_Turret : Building
     public override void Update()
     {
         currentTimeManipulation = gameManager.CurrentTimeMultiplier;
+        currentTime += Time.deltaTime * currentTimeManipulation;
 
         // turret code
         CheckForTargets();
@@ -75,16 +78,16 @@ public class Building_Turret : Building
     {
         turretBase.transform.up = (_target.transform.position - transform.position);
 
-        if(Time.time >= lastFired + firerate)
+        if(lastFired + firerate <= currentTime)
         {
-            Debug.Log("Firing...");
             GameObject firedProjectile = Instantiate(projectileGO, transform.position, Quaternion.identity);
 
             Projectile firedProjectileScript = firedProjectile.GetComponent<Projectile>();
             firedProjectileScript.Target = _target;
+            firedProjectileScript.Damage = damage;
             firedProjectiles.Add(firedProjectileScript);
 
-            lastFired = Time.time;
+            lastFired = currentTime;
         }
     }
 

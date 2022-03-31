@@ -41,6 +41,7 @@ public class BuildingMgr : MonoBehaviour
                     buildings[i].SpriteRenderer.sortingOrder = 0;
                 }
             }
+            // Interceptor Planets
             else if (buildings[i].SpriteRenderer.sprite != interceptorPlayerSprite &&
                     buildings[i].Alignment == "P" && buildings[i].Type == "Interceptor")
             {
@@ -53,6 +54,25 @@ public class BuildingMgr : MonoBehaviour
                     buildings[i].Alignment == "E" && buildings[i].Type == "Interceptor")
             {
                 buildings[i].SpriteRenderer.sprite = interceptorEnemySprite;
+                if (buildingsForLayer[i].layer == 6)
+                {
+                    buildingsForLayer[i].layer = 7;
+                    buildings[i].SpriteRenderer.sortingOrder = 0;
+                }
+            }
+            // Turret Planets
+            else if (buildings[i].SpriteRenderer.sprite != normalPlayerSprite &&
+                buildings[i].Alignment == "P" && buildings[i].Type == "Turret")
+            {
+                buildings[i].SpriteRenderer.sprite = normalPlayerSprite; // Change if we get a special planet sprite
+
+                buildingsForLayer[i].layer = 6;
+                buildings[i].SpriteRenderer.sortingOrder = 1;
+            }
+            else if (buildings[i].SpriteRenderer.sprite != normalEnemySprite &&
+                    buildings[i].Alignment == "E" && buildings[i].Type == "Turret")
+            {
+                buildings[i].SpriteRenderer.sprite = normalEnemySprite;
                 if (buildingsForLayer[i].layer == 6)
                 {
                     buildingsForLayer[i].layer = 7;

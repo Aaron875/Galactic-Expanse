@@ -136,7 +136,7 @@ public class GameManager : MonoBehaviour
     {
         for(int i = 0; i < buildings.Count; i++)
         {
-            if(buildings[i].Alignment != "N" && buildings[i].NumUnits < 50 && buildings[i].Type != "Shield")
+            if(buildings[i].Alignment != "N" && buildings[i].NumUnits < 50 && buildings[i].Type != "Shield" && buildings[i].Type != "Turret")
             {
                 // tutorial only
                 if (SceneManager.GetActiveScene().name == "Tutorial" &&

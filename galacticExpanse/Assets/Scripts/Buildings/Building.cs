@@ -52,15 +52,13 @@ public class Building : MonoBehaviour
         get { return distances; }
     }
 
-    private void Start()
+    public virtual void Start()
     {
         displayUnits = numUnits.ToString();
         unitText.text = displayUnits;
-
-        
     }
 
-    private void Update()
+    public virtual void Update()
     {
         displayUnits = numUnits.ToString();
         unitText.text = displayUnits;

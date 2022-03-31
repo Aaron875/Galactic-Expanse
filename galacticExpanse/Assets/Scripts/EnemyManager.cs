@@ -10,7 +10,7 @@ public class EnemyManager : MonoBehaviour
     private SquadManager squadManager;
 
     private int randomNum; //Used for holding randoms
-    private float timer; //Used for incrementing unit counts
+    private float timer; //Used for incrementing unit counts  -  moved to individual buildings
     //int attackCounter; - Variable just for testing, basically can be ignored
 
     // Start is called before the first frame update
@@ -26,17 +26,18 @@ public class EnemyManager : MonoBehaviour
 
     public void UpdateAI()
     {
-        for (int i = 0; i < buildings.Count; i++) //Loops through all buildings
-        {
 
-            if (buildings[i].Alignment == "E" && buildings[i].NumUnits >= 15) //If a building is an enemy building and has 15 or more units
+        timer += Time.deltaTime;
+
+        //Change number to change how quickly buildings gain units
+        if (timer >= 2)
+        {
+            for (int i = 0; i < buildings.Count; i++) //Loops through all buildings
             {
 
-                timer += Time.deltaTime;
-
-                //Change number to change how quickly buildings gain units
-                if (timer >= 2)
+                if (buildings[i].Alignment == "E" && buildings[i].NumUnits >= 15 && buildings[i].Type != "Shield") //If a building is an enemy building and has 15 or more units
                 {
+                
                     randomNum = Random.Range(0, 550); //600 is just randomly there, can be changed
                     if (randomNum < buildings[i].NumUnits || buildings[i].NumUnits >= 50) //If the number is less than the unit count it attacks, more aggressive the more units it has
                     {
@@ -45,11 +46,11 @@ public class EnemyManager : MonoBehaviour
                         float targetScore = -1000;
                         int potentialTarget;
                         float potentialScore;
-                        float distance;
 
                         for (int j = 0; j < buildings.Count; j++)
                         {
                             potentialTarget = j;
+                            potentialScore = buildings[j].Attackability;
 
                             //If target is self then it will never attack itself
                             if (j == i)
@@ -58,20 +59,18 @@ public class EnemyManager : MonoBehaviour
                             }
                             else
                             {
-                                distance = Vector3.Distance(buildings[i].transform.position, buildings[j].transform.position);
-                                potentialScore = 50 - (buildings[j].NumUnits);
 
                                 //Takes planet regening troops into account
-                                if(buildings[j].Alignment != "N" && potentialScore != 0)
+                                if(buildings[j].Alignment != "N" && buildings[j].NumUnits < 50)
                                 {
 
                                     //If interceptor time it takes to get somewhere is halved so their score is as well
                                     if (buildings[i].Type == "Interceptor")
                                     {
-                                        potentialScore -= 2 * (distance / 60);
+                                        potentialScore -= 2 * (buildings[i].Distances[j] / 60);
                                     }
 
-                                    potentialScore -= 2 * (distance / 30);
+                                    potentialScore -= 2 * (buildings[i].Distances[j] / 30);
                                 }
 
                                 //Can kill so drastically increases score
@@ -82,31 +81,10 @@ public class EnemyManager : MonoBehaviour
 
                                 //Farther planets have lower score
                                 //Distance is bigger than I anticipated, divided by 10 to reduce that
-                                potentialScore -= (distance / 10);
-
-                                //Higher target score if neutral, lower if enemy
-                                if (buildings[j].Alignment == "E")
-                                {
-                                    potentialScore -= 10;
-
-                                    //If enemy and max units, it should never send units there
-                                    if(buildings[j].NumUnits == 50)
-                                    {
-                                        potentialScore -= 400;
-                                    }
-                                }else if (buildings[j].Alignment == "N")
-                                {
-                                    potentialScore += 10;
-                                }
-
-                                //Higher if special building
-                                if(buildings[j].Type != "Normal")
-                                {
-                                    potentialScore += 30;
-                                }
+                                potentialScore -= (buildings[i].Distances[j] / 12);
 
                                 //Just some randomness so the AI isn't 100% predictable
-                                potentialScore += Random.Range(0, 75);
+                                potentialScore += Random.Range(0, 80);
 
                             }
 
@@ -123,9 +101,11 @@ public class EnemyManager : MonoBehaviour
                         Attack(i, currentTarget);
 
                     }
-                    timer = 0;
                 }
             }
+
+            timer = 0;
+
         }
     }
 

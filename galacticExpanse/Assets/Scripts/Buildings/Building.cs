@@ -10,6 +10,8 @@ public class Building : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private string type;
     [SerializeField] private Text unitText;
+    [SerializeField] private int attackability;
+    [SerializeField] private List<float> distances;
     private string displayUnits;
 
     public int NumUnits
@@ -39,16 +41,50 @@ public class Building : MonoBehaviour
         get { return displayUnits; }
     }
 
+    public int Attackability
+    {
+        get { return attackability; }
+        set { attackability = value; }
+    }
+
+    public List<float> Distances
+    {
+        get { return distances; }
+    }
+
     private void Start()
     {
         displayUnits = numUnits.ToString();
         unitText.text = displayUnits;
+
+        
     }
 
     private void Update()
     {
         displayUnits = numUnits.ToString();
         unitText.text = displayUnits;
+
+        attackability = 50 - numUnits;
+
+        if(type != "Normal")
+        {
+            attackability += 30;
+        }
+
+        if(alignment == "N")
+        {
+            attackability += 10;
+        }
+        else if(alignment == "E")
+        {
+            attackability -= 10;
+
+            if (numUnits >= 30)
+            {
+                attackability -= 400;
+            }
+        }
     }
 
 

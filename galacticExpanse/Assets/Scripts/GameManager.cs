@@ -55,6 +55,15 @@ public class GameManager : MonoBehaviour
             tutorialStep2.SetActive(false);
         }
 
+        //Sets distances for planets
+        for(int i = 0; i < buildings.Count; i++)
+        {
+            for (int j = 0; j < buildings.Count; j++)
+            {
+                buildings[i].Distances.Add(Vector3.Distance(buildings[i].transform.position, buildings[j].transform.position));
+            }
+        }
+
         timer = 0;
     }
 
@@ -116,7 +125,7 @@ public class GameManager : MonoBehaviour
     {
         for(int i = 0; i < buildings.Count; i++)
         {
-            if(buildings[i].Alignment != "N" && buildings[i].NumUnits < 50)
+            if(buildings[i].Alignment != "N" && buildings[i].NumUnits < 50 && buildings[i].Type != "Shield")
             {
                 // tutorial only
                 if (SceneManager.GetActiveScene().name == "Tutorial" &&

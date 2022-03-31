@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class Building_Turret : Building
 {
     [SerializeField] private SquadManager squadManager;
+    [SerializeField] private GameManager gameManager;
 
     [SerializeField] private GameObject turretBase;
     [SerializeField] private GameObject turretBarrel;
@@ -13,10 +15,22 @@ public class Building_Turret : Building
     [SerializeField] private float firerate = 2.5f;
     [SerializeField] private float lastFired = 0;
 
+    [SerializeField] private List<Projectile> firedProjectiles;
+    [SerializeField] private int currentTimeManipulation;
+
+    public int CurrentTimeManipulation
+    {
+        set { currentTimeManipulation = value; }
+    }
+
+
     // Start is called before the first frame update
     public override void Start()
     {
         squadManager = GameObject.Find("GameManager").GetComponent<SquadManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        firedProjectiles = new List<Projectile>();
 
         base.Start();
     }
@@ -24,10 +38,37 @@ public class Building_Turret : Building
     // Update is called once per frame
     public override void Update()
     {
+        currentTimeManipulation = gameManager.CurrentTimeMultiplier;
+
         // turret code
         CheckForTargets();
 
+        CleanupProjectiles();
+
+        foreach(Projectile projectile in firedProjectiles)
+        {
+            projectile.UpdateProjectile(currentTimeManipulation);
+        }
+
         base.Update();
+    }
+
+    private void CleanupProjectiles()
+    {
+        List<Projectile> projectilesToRemove = new List<Projectile>();
+
+        for (int i = 0; i < firedProjectiles.Count; i++)
+        {
+            if (firedProjectiles[i] == null)
+            {
+                projectilesToRemove.Add(firedProjectiles[i]);
+            }
+        }
+
+        foreach (Projectile projectile in projectilesToRemove)
+        {
+            firedProjectiles.Remove(projectile);
+        }
     }
 
     private void Fire(Squad _target)
@@ -38,7 +79,11 @@ public class Building_Turret : Building
         {
             Debug.Log("Firing...");
             GameObject firedProjectile = Instantiate(projectileGO, transform.position, Quaternion.identity);
-            firedProjectile.GetComponent<Projectile>().Target = _target;
+
+            Projectile firedProjectileScript = firedProjectile.GetComponent<Projectile>();
+            firedProjectileScript.Target = _target;
+            firedProjectiles.Add(firedProjectileScript);
+
             lastFired = Time.time;
         }
     }

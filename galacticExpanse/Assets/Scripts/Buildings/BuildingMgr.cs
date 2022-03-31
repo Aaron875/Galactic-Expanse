@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BuildingMgr : MonoBehaviour
 {
-
     [SerializeField] private Sprite normalPlayerSprite;
     [SerializeField] private Sprite normalEnemySprite;
     [SerializeField] private Sprite interceptorPlayerSprite;
@@ -16,7 +15,6 @@ public class BuildingMgr : MonoBehaviour
     {
         get { return buildings; }
     }
-
     // Update is called once per frame
     void Update()
     {

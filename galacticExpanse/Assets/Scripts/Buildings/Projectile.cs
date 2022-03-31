@@ -14,8 +14,7 @@ public class Projectile : MonoBehaviour
         set { target = value; }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateProjectile(int _currentTimeManipulation)
     {
         try
         {
@@ -24,7 +23,7 @@ public class Projectile : MonoBehaviour
                 Destroy(this.gameObject);
             }
 
-            transform.position = Vector2.MoveTowards(transform.position, target.transform.position, Time.deltaTime * speed);
+            transform.position = Vector2.MoveTowards(transform.position, target.transform.position, Time.deltaTime * speed * _currentTimeManipulation);
             transform.up = target.transform.position - transform.position;
 
             if (Vector2.Distance(transform.position, target.transform.position) <= 20)

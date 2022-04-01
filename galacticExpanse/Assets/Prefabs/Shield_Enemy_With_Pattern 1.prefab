@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6806553480560219186}
   - component: {fileID: 8791020835682609963}
   - component: {fileID: 5122768098229725973}
+  - component: {fileID: -4518845050501246313}
   m_Layer: 7
   m_Name: Shield_Enemy_With_Pattern 1
   m_TagString: Untagged
@@ -110,6 +111,22 @@ MonoBehaviour:
   targetEnemy: {fileID: 0}
   targetPlayerScript: {fileID: 0}
   targetEnemyScript: {fileID: 0}
+--- !u!58 &-4518845050501246313
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1177388557165373037}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 5.12
 --- !u!1 &4408825133228227207
 GameObject:
   m_ObjectHideFlags: 0

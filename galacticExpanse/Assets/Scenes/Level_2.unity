@@ -632,6 +632,7 @@ MonoBehaviour:
     m_Bits: 128
   selectedObject: {fileID: 0}
   selectedObject2: {fileID: 0}
+  attackingPlanets: []
 --- !u!81 &100867054
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1180,7 +1181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4408825133228227204, guid: f16ff9731f8f50a49b1f895e2f61d7c8, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5122768098229725973, guid: f16ff9731f8f50a49b1f895e2f61d7c8, type: 3}
       propertyPath: unitText

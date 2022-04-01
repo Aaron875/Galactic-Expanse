@@ -1630,6 +1630,7 @@ MonoBehaviour:
     m_Bits: 128
   selectedObject: {fileID: 0}
   selectedObject2: {fileID: 0}
+  attackingPlanets: []
 --- !u!120 &1053431904
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -2206,6 +2207,10 @@ PrefabInstance:
       propertyPath: unitText
       value: 
       objectReference: {fileID: 321326699}
+    - target: {fileID: 3912428557338213309, guid: dd74d953df001534c8246d774520409a, type: 3}
+      propertyPath: alignment
+      value: N
+      objectReference: {fileID: 0}
     - target: {fileID: 5969792578273523775, guid: dd74d953df001534c8246d774520409a, type: 3}
       propertyPath: m_RootOrder
       value: 6

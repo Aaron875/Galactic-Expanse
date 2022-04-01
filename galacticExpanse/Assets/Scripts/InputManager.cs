@@ -21,6 +21,7 @@ public class InputManager : MonoBehaviour
     // Line Renderer stuff
     private LineRenderer lr;
     private Transform[] points;
+    [SerializeField]List<GameObject> attackingPlanets;
 
     void Start()
     {
@@ -33,6 +34,7 @@ public class InputManager : MonoBehaviour
     void Update()
     {
         UpdateTimeMultiplier();
+
 
         // Called when left mouse click is held down
         if (Input.GetMouseButtonDown(0))
@@ -56,6 +58,29 @@ public class InputManager : MonoBehaviour
 
         if (isDragging)
         {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D select = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, draggableMask);
+            if (select.collider != null)
+            {
+                if (attackingPlanets.Count < 1)
+                {
+                    attackingPlanets.Add(select.collider.gameObject);
+                }
+                else if (!attackingPlanets.Contains(select.collider.gameObject)) // MUST HAVE THIS ELSE IF OTHERWISE IT BREAKS
+                {
+                    for (int i = 0; i < attackingPlanets.Count; i++)
+                    {
+                        if (select.collider.gameObject != attackingPlanets[i].gameObject)
+                        {
+                            i++;
+                            attackingPlanets.Add(select.collider.gameObject);
+                            return;
+                        }
+                    }
+                }
+
+                
+            }
             pos = mousePos();
             lr.SetPosition(1, pos);
         }
@@ -71,11 +96,20 @@ public class InputManager : MonoBehaviour
                 selectedObject.GetComponent<CircleCollider2D>().enabled = true;
                 if(startLocation != null && targetLocation != null)
                 {
+                    if (attackingPlanets != null)
+                    {
+                        for (int i = 0; i < attackingPlanets.Count; i++)
+                        {
+                            Attack(attackingPlanets[i].GetComponent<Building>(), targetLocation);
+                        }
+                    }
+
                     Attack(startLocation, targetLocation);
                     startLocation = null;
                     targetLocation = null;
                 }
             }
+            attackingPlanets.Clear();
         }
 
         HitDetection();

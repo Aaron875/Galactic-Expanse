@@ -9,6 +9,7 @@ public class Overlay : MonoBehaviour
     private Button startButton;
     private Button backButton;
     [SerializeField] private string overlayName;
+    [SerializeField] private int levelNumber;
 
     void Start()
     {
@@ -20,13 +21,12 @@ public class Overlay : MonoBehaviour
 
     void StartButtonClicked()
     {
-        SceneManager.LoadScene("Game", LoadSceneMode.Single);
+        SceneManager.LoadScene("Level_" + levelNumber, LoadSceneMode.Single);
     }
 
     void BackButtonClicked()
     {
         GameObject overlay = GameObject.Find(overlayName);
         Destroy(overlay);
-        
     }
 }

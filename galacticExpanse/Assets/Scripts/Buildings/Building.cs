@@ -13,6 +13,7 @@ public class Building : MonoBehaviour
     [SerializeField] private int attackability;
     [SerializeField] private List<float> distances;
     private string displayUnits;
+    [SerializeField] private bool shielded = false;
 
     public int NumUnits
     {
@@ -45,6 +46,12 @@ public class Building : MonoBehaviour
     {
         get { return attackability; }
         set { attackability = value; }
+    }
+
+    public bool Shielded
+    {
+        get { return shielded; }
+        set { shielded = value; }
     }
 
     public List<float> Distances
@@ -95,9 +102,9 @@ public class Building : MonoBehaviour
     /// <param name="squadAlignment"></param>
     public void damageBuilding (int squadUnits, string squadAlignment )
     {
-        switch((alignment, squadAlignment))
+        switch((alignment, squadAlignment, shielded))
         {
-            case ("P", "P"):
+            case ("P", "P", false):
                 if (numUnits + squadUnits <= 50)
                 {
                     numUnits += squadUnits;
@@ -109,7 +116,19 @@ public class Building : MonoBehaviour
                 displayUnits = numUnits.ToString();
                 break;
 
-            case ("P", "E"):
+            case ("P", "P", true):
+                if (numUnits + squadUnits <= 50)
+                {
+                    numUnits += squadUnits;
+                }
+                else
+                {
+                    numUnits = 50;
+                }
+                displayUnits = numUnits.ToString();
+                break;
+
+            case ("P", "E", false):
                 if (numUnits - squadUnits <= 0)
                 {
 
@@ -124,7 +143,7 @@ public class Building : MonoBehaviour
                 displayUnits = numUnits.ToString();
                 break;
 
-            case ("E", "E"):
+            case ("E", "E", false):
                 if (numUnits + squadUnits <= 50)
                 {
                     numUnits += squadUnits;
@@ -136,7 +155,19 @@ public class Building : MonoBehaviour
                 displayUnits = numUnits.ToString();
                 break;
 
-            case ("E", "P"):
+            case ("E", "E", true):
+                if (numUnits + squadUnits <= 50)
+                {
+                    numUnits += squadUnits;
+                }
+                else
+                {
+                    numUnits = 50;
+                }
+                displayUnits = numUnits.ToString();
+                break;
+
+            case ("E", "P", false):
                 if (numUnits - squadUnits <= 0)
                 {
 
@@ -151,7 +182,7 @@ public class Building : MonoBehaviour
                 displayUnits = numUnits.ToString();
                 break;
 
-            case ("N", "P"):
+            case ("N", "P", false):
                 if (numUnits - squadUnits <= 0)
                 {
 
@@ -166,7 +197,7 @@ public class Building : MonoBehaviour
                 displayUnits = numUnits.ToString();
                 break;
 
-            case ("N", "E"):
+            case ("N", "E", false):
                 if (numUnits - squadUnits <= 0)
                 {
 

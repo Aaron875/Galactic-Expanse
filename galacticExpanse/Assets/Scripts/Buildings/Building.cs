@@ -104,7 +104,19 @@ public class Building : MonoBehaviour
     {
         switch((alignment, squadAlignment, shielded))
         {
-            case ("P", "P", false || true):
+            case ("P", "P", false):
+                if (numUnits + squadUnits <= 50)
+                {
+                    numUnits += squadUnits;
+                }
+                else
+                {
+                    numUnits = 50;
+                }
+                displayUnits = numUnits.ToString();
+                break;
+
+            case ("P", "P", true):
                 if (numUnits + squadUnits <= 50)
                 {
                     numUnits += squadUnits;
@@ -131,7 +143,19 @@ public class Building : MonoBehaviour
                 displayUnits = numUnits.ToString();
                 break;
 
-            case ("E", "E", false || true):
+            case ("E", "E", false):
+                if (numUnits + squadUnits <= 50)
+                {
+                    numUnits += squadUnits;
+                }
+                else
+                {
+                    numUnits = 50;
+                }
+                displayUnits = numUnits.ToString();
+                break;
+
+            case ("E", "E", true):
                 if (numUnits + squadUnits <= 50)
                 {
                     numUnits += squadUnits;

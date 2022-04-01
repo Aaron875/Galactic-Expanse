@@ -8,6 +8,8 @@ public class BuildingMgr : MonoBehaviour
     [SerializeField] private Sprite normalEnemySprite;
     [SerializeField] private Sprite interceptorPlayerSprite;
     [SerializeField] private Sprite interceptorEnemySprite;
+    [SerializeField] private Sprite shieldPlayerSprite;
+    [SerializeField] private Sprite shieldEnemySprite;
     [SerializeField] private List<Building> buildings;
     [SerializeField] private List<GameObject> buildingsForLayer;
 
@@ -71,6 +73,24 @@ public class BuildingMgr : MonoBehaviour
                     buildings[i].Alignment == "E" && buildings[i].Type == "Turret")
             {
                 buildings[i].SpriteRenderer.sprite = normalEnemySprite;
+                if (buildingsForLayer[i].layer == 6)
+                {
+                    buildingsForLayer[i].layer = 7;
+                    buildings[i].SpriteRenderer.sortingOrder = 0;
+                }
+            }
+            else if (buildings[i].SpriteRenderer.sprite != shieldPlayerSprite &&
+                    buildings[i].Alignment == "P" && buildings[i].Type == "Shield")
+            {
+                buildings[i].SpriteRenderer.sprite = shieldPlayerSprite;
+
+                buildingsForLayer[i].layer = 6;
+                buildings[i].SpriteRenderer.sortingOrder = 1;
+            }
+            else if (buildings[i].SpriteRenderer.sprite != shieldEnemySprite &&
+                    buildings[i].Alignment == "E" && buildings[i].Type == "Shield")
+            {
+                buildings[i].SpriteRenderer.sprite = shieldEnemySprite;
                 if (buildingsForLayer[i].layer == 6)
                 {
                     buildingsForLayer[i].layer = 7;

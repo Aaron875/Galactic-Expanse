@@ -114,7 +114,7 @@ public class InputManager : MonoBehaviour
     private void Attack(Building _startLocation, Building _targetLocation)
     {
         // public void CreateSquad(int _numUnits, Building _startLocation, Building _targetLocation)
-
+        Debug.Log(targetLocation);
         //This makes sure that the unit numbers will not be weird if it has an odd number
         if (_startLocation.NumUnits % 2 == 0)
         {

@@ -62,6 +62,11 @@ public class Squad : MonoBehaviour
         tempTextBox.text = displayUnits;
     }
 
+    private void Update()
+    {
+        tempTextBox.text = numUnits.ToString();
+    }
+
     public void UpdateSquad(int _currentTimeMultiplier)
     {
         //Debug.Log("Updating position...");

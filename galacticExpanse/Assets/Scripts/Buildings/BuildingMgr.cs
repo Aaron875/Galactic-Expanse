@@ -99,6 +99,25 @@ public class BuildingMgr : MonoBehaviour
                     buildings[i].SpriteRenderer.sortingOrder = 0;
                 }
             }
+            //Carrier Planets
+            else if (buildings[i].SpriteRenderer.sprite != shieldPlayerSprite &&
+                    buildings[i].Alignment == "P" && buildings[i].Type == "Carrier")
+            {
+                buildings[i].SpriteRenderer.sprite = normalPlayerSprite;
+
+                buildingsForLayer[i].layer = 6;
+                buildings[i].SpriteRenderer.sortingOrder = 1;
+            }
+            else if (buildings[i].SpriteRenderer.sprite != shieldEnemySprite &&
+                    buildings[i].Alignment == "E" && buildings[i].Type == "Carrier")
+            {
+                buildings[i].SpriteRenderer.sprite = normalEnemySprite;
+                if (buildingsForLayer[i].layer == 7)
+                {
+                    buildingsForLayer[i].layer = 7;
+                    buildings[i].SpriteRenderer.sortingOrder = 0;
+                }
+            }
         }
     }
 }

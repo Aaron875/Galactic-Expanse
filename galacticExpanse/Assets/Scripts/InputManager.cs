@@ -7,7 +7,7 @@ public class InputManager : MonoBehaviour
 {
     [SerializeField] private SquadManager squadManager;
     [SerializeField] private GameManager gameManager;
-    private Building startLocation;
+    //private Building startLocation;
     private Building targetLocation;
 
     public LayerMask draggableMask;
@@ -45,12 +45,21 @@ public class InputManager : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, draggableMask);
             if(hit.collider != null)
             {
-                //Debug.Log(hit.collider.gameObject.name);
+                Debug.Log(hit.collider.gameObject.name);
                 selectedObject = hit.collider.gameObject;
                 selectedObject.GetComponent<CircleCollider2D>().enabled = false;
                 originPos = selectedObject.transform.position;
                 isDragging = true;
-                startLocation = selectedObject.GetComponent<Building>();
+
+/*                if(selectedObject.tag == "Carrier")
+                {
+                    startLocation = selectedObject.GetComponent<Squad>();
+                }
+                else
+                {
+                    startLocation = selectedObject.GetComponent<Building>();
+
+                }*/
 
                 lr.SetPosition(0, originPos);
             }
@@ -94,18 +103,33 @@ public class InputManager : MonoBehaviour
             {
                 selectedObject.transform.position = originPos;
                 selectedObject.GetComponent<CircleCollider2D>().enabled = true;
-                if(startLocation != null && targetLocation != null)
+                if(selectedObject != null && targetLocation != null)
                 {
                     if (attackingPlanets != null)
                     {
                         for (int i = 0; i < attackingPlanets.Count; i++)
                         {
-                            Attack(attackingPlanets[i].GetComponent<Building>(), targetLocation);
+                            if(attackingPlanets[i].tag == "Carrier")
+                            {
+                                Attack(attackingPlanets[i].GetComponent<Squad>(), targetLocation);
+                            }
+                            else
+                            {
+                                Attack(attackingPlanets[i].GetComponent<Building>(), targetLocation);
+                            }
                         }
                     }
 
-                    Attack(startLocation, targetLocation);
-                    startLocation = null;
+                    if(selectedObject.gameObject.tag == "Carrier")
+                    {
+                        Attack(selectedObject.GetComponent<Squad>(), targetLocation);
+                    }
+                    else
+                    {
+                        Attack(selectedObject.GetComponent<Building>(), targetLocation);
+                    }
+
+                    selectedObject = null;
                     targetLocation = null;
                 }
             }
@@ -160,6 +184,22 @@ public class InputManager : MonoBehaviour
             _startLocation.NumUnits = _startLocation.NumUnits / 2;
             squadManager.CreateSquad(_startLocation.NumUnits, _startLocation, _targetLocation);
             _startLocation.NumUnits++;
+        }
+    }
+
+    private void Attack(Squad _carrier, Building _targetLocation)
+    {
+        Debug.Log("Attacking from carrier...");
+        if(_carrier.NumUnits % 2 == 0)
+        {
+            _carrier.NumUnits = _carrier.NumUnits / 2;
+            squadManager.CreateSquad(_carrier.NumUnits, _carrier, _targetLocation);
+        }
+        else
+        {
+            _carrier.NumUnits = _carrier.NumUnits / 2;
+            squadManager.CreateSquad(_carrier.NumUnits, _carrier, _targetLocation);
+            _carrier.NumUnits++;
         }
     }
 

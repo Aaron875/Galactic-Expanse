@@ -8,8 +8,10 @@ public class SquadManager : MonoBehaviour
 
     [SerializeField] private GameObject playerSquadPrefab;
     [SerializeField] private GameObject playerInterceptorPrefab;
+    [SerializeField] private GameObject playerCarrierPrefab;
     [SerializeField] private GameObject enemySquadPrefab;
     [SerializeField] private GameObject enemyInterceptorPrefab;
+    [SerializeField] private GameObject enemyCarrierPrefab;
     [SerializeField] private List<Squad> playerSquads;
     [SerializeField] private List<Squad> enemySquads;
     private List<Squad> squadsToRemove;
@@ -128,6 +130,10 @@ public class SquadManager : MonoBehaviour
                 {
                     newSquad = Instantiate(playerInterceptorPrefab, _startLocation.transform.position, Quaternion.identity);
                 }
+                else if(unitType == "Carrier")
+                {
+                    newSquad = Instantiate(playerCarrierPrefab, _startLocation.transform.position, Quaternion.identity);
+                }
                 else
                 {
                     newSquad = Instantiate(playerSquadPrefab, _startLocation.transform.position, Quaternion.identity);
@@ -139,10 +145,52 @@ public class SquadManager : MonoBehaviour
                 {
                     newSquad = Instantiate(enemyInterceptorPrefab, _startLocation.transform.position, Quaternion.identity);
                 }
+                else if (unitType == "Carrier")
+                {
+                    newSquad = Instantiate(enemyCarrierPrefab, _startLocation.transform.position, Quaternion.identity);
+                }
                 else
                 {
                     newSquad = Instantiate(enemySquadPrefab, _startLocation.transform.position, Quaternion.identity);
                 }
+            }
+
+            // Set the script info
+            Squad newSquadScript = newSquad.GetComponent<Squad>();
+
+            newSquadScript.NumUnits = _numUnits;
+            newSquadScript.TargetLocation = _targetLocation;
+            newSquad.transform.up = _targetLocation.transform.position - newSquad.transform.position;
+
+            // Assign the team
+            if (team == "P")
+            {
+                newSquadScript.Team = "P";
+                playerSquads.Add(newSquadScript);
+                return;
+            }
+
+            newSquadScript.Team = "E";
+            enemySquads.Add(newSquadScript);
+        }
+    }
+
+    public void CreateSquad(int _numUnits, Squad _carrier, Building _targetLocation)
+    {
+        if (_numUnits > 0)
+        {
+            string team = _carrier.Team;
+
+            GameObject newSquad;
+
+            // Set the prefab
+            if (team == "P")
+            {
+                newSquad = Instantiate(playerSquadPrefab, _carrier.transform.position, Quaternion.identity);
+            }
+            else
+            {
+                newSquad = Instantiate(enemySquadPrefab, _carrier.transform.position, Quaternion.identity);
             }
 
             // Set the script info

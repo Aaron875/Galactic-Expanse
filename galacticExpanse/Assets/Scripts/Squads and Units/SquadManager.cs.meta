@@ -6,8 +6,10 @@ MonoImporter:
   defaultReferences:
   - playerSquadPrefab: {fileID: 8472905053875474509, guid: 5e4caf5f9b711c04ba70e8c5ee69a0f1, type: 3}
   - playerInterceptorPrefab: {fileID: 8472905053875474509, guid: e4c195111e835bf4da60d2ad2e3b4911, type: 3}
+  - playerCarrierPrefab: {fileID: 7171084248066983199, guid: 6cfcc25b02729074ab20fa3c29d0d05d, type: 3}
   - enemySquadPrefab: {fileID: 8472905053875474509, guid: 34066cee67f642246abd03b4a79d1a45, type: 3}
   - enemyInterceptorPrefab: {fileID: 8472905053875474509, guid: bb1c05447b22ceb4d8dfe5776407f8da, type: 3}
+  - enemyCarrierPrefab: {fileID: 7171084248066983199, guid: ad8507608b264b84ba0a1836e5bd0a7a, type: 3}
   - gameManager: {instanceID: 0}
   - targetTower: {instanceID: 0}
   executionOrder: 0

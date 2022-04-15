@@ -206,9 +206,9 @@ public class GameManager : MonoBehaviour
                         break;
 
                     case ("Level_3"):
-                        foreach (string l in GalaxyMapManager.lvlNames)
+                        for (int i = 0; i < GalaxyMapManager.lvlNames.Count; i++)
                         {
-                            if (l == "Level_2")
+                            if (GalaxyMapManager.lvlNames[i] == "Level_2")
                             {
                                 GalaxyMapManager.lvlNames.Add("Level_4");
                             }
@@ -223,9 +223,9 @@ public class GameManager : MonoBehaviour
                         break;
 
                     case ("Level_5"):
-                        foreach (string l in GalaxyMapManager.lvlNames)
+                        for (int i = 0; i < GalaxyMapManager.lvlNames.Count; i++)
                         {
-                            if (l == "Level_6")
+                            if (GalaxyMapManager.lvlNames[i] == "Level_6")
                             {
                                 GalaxyMapManager.lvlNames.Add("Level_7");
                             }
@@ -235,9 +235,9 @@ public class GameManager : MonoBehaviour
                         break;
 
                     case ("Level_6"):
-                        foreach (string l in GalaxyMapManager.lvlNames)
+                        for (int i = 0; i < GalaxyMapManager.lvlNames.Count; i++)
                         {
-                            if (l == "Level_5")
+                            if (GalaxyMapManager.lvlNames[i] == "Level_5")
                             {
                                 GalaxyMapManager.lvlNames.Add("Level_7");
                             }
@@ -247,13 +247,13 @@ public class GameManager : MonoBehaviour
                         break;
 
                     case ("Level_7"):
-                        foreach (string l in GalaxyMapManager.lvlNames)
+                        for (int i = 0; i < GalaxyMapManager.lvlNames.Count; i++)
                         {
-                            if (l == "Level_5")
+                            if (GalaxyMapManager.lvlNames[i] == "Level_5")
                             {
                                 GalaxyMapManager.lvlNames.Add("Level_8");
                             }
-                            else if (l == "Level_6")
+                            else if (GalaxyMapManager.lvlNames[i] == "Level_6")
                             {
                                 GalaxyMapManager.lvlNames.Add("Level_9");
                             }
@@ -262,9 +262,9 @@ public class GameManager : MonoBehaviour
                         break;
 
                     case ("Level_8"):
-                        foreach (string l in GalaxyMapManager.lvlNames)
+                        for (int i = 0; i < GalaxyMapManager.lvlNames.Count; i++)
                         {
-                            if (l == "Level_9")
+                            if (GalaxyMapManager.lvlNames[i] == "Level_9")
                             {
                                 GalaxyMapManager.lvlNames.Add("Level_10");
                             }
@@ -273,13 +273,13 @@ public class GameManager : MonoBehaviour
                         break;
 
                     case ("Level_9"):
-                        foreach (string l in GalaxyMapManager.lvlNames)
+                        for (int i = 0; i < GalaxyMapManager.lvlNames.Count; i++)
                         {
-                            if (l == "Level_8")
+                            if (GalaxyMapManager.lvlNames[i] == "Level_8")
                             {
                                 GalaxyMapManager.lvlNames.Add("Level_10");
                             }
-                            else if (l == "Level_10")
+                            else if (GalaxyMapManager.lvlNames[i] == "Level_10")
                             {
                                 GalaxyMapManager.lvlNames.Add("Level_11");
                             }
@@ -288,9 +288,9 @@ public class GameManager : MonoBehaviour
                         break;
 
                     case ("Level_10"):
-                        foreach (string l in GalaxyMapManager.lvlNames)
+                        for (int i = 0; i < GalaxyMapManager.lvlNames.Count; i++)
                         {
-                            if (l == "Level_9")
+                            if (GalaxyMapManager.lvlNames[i] == "Level_9")
                             {
                                 GalaxyMapManager.lvlNames.Add("Level_11");
                             }

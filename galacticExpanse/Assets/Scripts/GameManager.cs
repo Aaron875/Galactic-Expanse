@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text replayButtonText;
     //private Text replayButtonText;
 
+
     public int CurrentTimeMultiplier
     {
         get { return currentTimeMultiplier; }
@@ -180,7 +181,131 @@ public class GameManager : MonoBehaviour
         // Ends the game and either exits the tutorial or shows the replay button
         if(playerBuildings == buildings.Count - neutralBuildings)
         {
+            //This if statement locks and unlocks the levels for selection on the galaxy map
+            //It adds and removes from the public strict list in the GalaxyMapManager Script
+            if (isPaused == false)
+            {
+                Scene scene = SceneManager.GetActiveScene();
+                switch (scene.name)
+                {
+                    case ("Level_1"):
+                        GalaxyMapManager.lvlNames.Remove("Level_1");
+                        GalaxyMapManager.lvlNames.Add("Level_2");
+                        GalaxyMapManager.lvlNames.Add("Level_3");
+                        break;
+
+                    case ("Level_2"):
+                        for (int i = 0; i < GalaxyMapManager.lvlNames.Count; i++)
+                        {
+                            if (GalaxyMapManager.lvlNames[i] == "Level_3")
+                            {
+                                GalaxyMapManager.lvlNames.Add("Level_4");
+                            }
+                        }
+                        GalaxyMapManager.lvlNames.Remove("Level_2");
+                        break;
+
+                    case ("Level_3"):
+                        foreach (string l in GalaxyMapManager.lvlNames)
+                        {
+                            if (l == "Level_2")
+                            {
+                                GalaxyMapManager.lvlNames.Add("Level_4");
+                            }
+                        }
+                        GalaxyMapManager.lvlNames.Remove("Level_3");
+                        break;
+
+                    case ("Level_4"):
+                        GalaxyMapManager.lvlNames.Remove("Level_4");
+                        GalaxyMapManager.lvlNames.Add("Level_5");
+                        GalaxyMapManager.lvlNames.Add("Level_6");
+                        break;
+
+                    case ("Level_5"):
+                        foreach (string l in GalaxyMapManager.lvlNames)
+                        {
+                            if (l == "Level_6")
+                            {
+                                GalaxyMapManager.lvlNames.Add("Level_7");
+                            }
+                        }
+                        GalaxyMapManager.lvlNames.Add("Level_8");
+                        GalaxyMapManager.lvlNames.Remove("Level_5");
+                        break;
+
+                    case ("Level_6"):
+                        foreach (string l in GalaxyMapManager.lvlNames)
+                        {
+                            if (l == "Level_5")
+                            {
+                                GalaxyMapManager.lvlNames.Add("Level_7");
+                            }
+                        }
+                        GalaxyMapManager.lvlNames.Add("Level_9");
+                        GalaxyMapManager.lvlNames.Remove("Level_6");
+                        break;
+
+                    case ("Level_7"):
+                        foreach (string l in GalaxyMapManager.lvlNames)
+                        {
+                            if (l == "Level_5")
+                            {
+                                GalaxyMapManager.lvlNames.Add("Level_8");
+                            }
+                            else if (l == "Level_6")
+                            {
+                                GalaxyMapManager.lvlNames.Add("Level_9");
+                            }
+                        }
+                        GalaxyMapManager.lvlNames.Remove("Level_7");
+                        break;
+
+                    case ("Level_8"):
+                        foreach (string l in GalaxyMapManager.lvlNames)
+                        {
+                            if (l == "Level_9")
+                            {
+                                GalaxyMapManager.lvlNames.Add("Level_10");
+                            }
+                        }
+                        GalaxyMapManager.lvlNames.Remove("Level_8");
+                        break;
+
+                    case ("Level_9"):
+                        foreach (string l in GalaxyMapManager.lvlNames)
+                        {
+                            if (l == "Level_8")
+                            {
+                                GalaxyMapManager.lvlNames.Add("Level_10");
+                            }
+                            else if (l == "Level_10")
+                            {
+                                GalaxyMapManager.lvlNames.Add("Level_11");
+                            }
+                        }
+                        GalaxyMapManager.lvlNames.Remove("Level_9");
+                        break;
+
+                    case ("Level_10"):
+                        foreach (string l in GalaxyMapManager.lvlNames)
+                        {
+                            if (l == "Level_9")
+                            {
+                                GalaxyMapManager.lvlNames.Add("Level_11");
+                            }
+                        }
+                        GalaxyMapManager.lvlNames.Remove("Level_10");
+                        break;
+
+                    case ("Level_11"):
+                        GalaxyMapManager.lvlNames.Remove("Level_11");
+                        break;
+                }
+            }
+
             isPaused = true;
+            
 
             if (isTutorialActive)
             {

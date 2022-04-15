@@ -1622,8 +1622,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSquadPrefab: {fileID: 7171084248066983199, guid: 541ae6292e092cb45a824dd669dcfd99, type: 3}
   playerInterceptorPrefab: {fileID: 5331760160066374621, guid: 8e3efd9d01ba8af4a81433e7618b9079, type: 3}
+  playerCarrierPrefab: {fileID: 0}
   enemySquadPrefab: {fileID: 6510845525784198435, guid: 05b8c645b2e32104eb21682a9cd46783, type: 3}
   enemyInterceptorPrefab: {fileID: 7018826637201469223, guid: df8351bbf48fc924d8fd3d2d95369f70, type: 3}
+  enemyCarrierPrefab: {fileID: 0}
   playerSquads: []
   enemySquads: []
   distanceToAttack: 0
@@ -2111,7 +2113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4378157994132311079, guid: 10de290f61a03e0459a40ab9535fe098, type: 3}
       propertyPath: m_Layer
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10de290f61a03e0459a40ab9535fe098, type: 3}

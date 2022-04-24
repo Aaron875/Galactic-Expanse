@@ -47,8 +47,9 @@ public class InputManager : MonoBehaviour
             {
                 Debug.Log(hit.collider.gameObject.name);
                 selectedObject = hit.collider.gameObject;
-                selectedObject.GetComponent<CircleCollider2D>().enabled = false;
-                originPos = selectedObject.transform.position;
+                attackingPlanets.Add(selectedObject);
+                //selectedObject.GetComponent<CircleCollider2D>().enabled = false;
+                //originPos = selectedObject.transform.position;
                 isDragging = true;
 
 /*                if(selectedObject.tag == "Carrier")
@@ -61,7 +62,7 @@ public class InputManager : MonoBehaviour
 
                 }*/
 
-                lr.SetPosition(0, originPos);
+                //lr.SetPosition(0, originPos);
             }
         }
 
@@ -87,22 +88,28 @@ public class InputManager : MonoBehaviour
                         }
                     }
                 }
-
-                
             }
             pos = mousePos();
-            lr.SetPosition(1, pos);
+            //lr.SetPosition(1, pos);
+
+            for (int i = 0; i < attackingPlanets.Count; i++)
+            {
+                attackingPlanets[i].GetComponent<LineRenderer>().enabled = true;
+                lr = attackingPlanets[i].GetComponent<LineRenderer>();
+                lr.SetPosition(0, attackingPlanets[i].transform.position);
+                lr.SetPosition(1, pos);
+            }
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            lr.SetPosition(0, new Vector3(0, 0, 0));
-            lr.SetPosition(1, new Vector3(0,0,0));
+            //lr.SetPosition(0, new Vector3(0, 0, 0));
+            //lr.SetPosition(1, new Vector3(0,0,0));
             isDragging = false;
             if (selectedObject != null)
             {
-                selectedObject.transform.position = originPos;
-                selectedObject.GetComponent<CircleCollider2D>().enabled = true;
+                //selectedObject.transform.position = originPos;
+                //selectedObject.GetComponent<CircleCollider2D>().enabled = true;
                 if(selectedObject != null && targetLocation != null)
                 {
                     if (attackingPlanets != null)
@@ -132,6 +139,10 @@ public class InputManager : MonoBehaviour
                     selectedObject = null;
                     targetLocation = null;
                 }
+            }
+            for (int i = 0; i < attackingPlanets.Count; i++)
+            {
+                attackingPlanets[i].GetComponent<LineRenderer>().enabled = false;
             }
             attackingPlanets.Clear();
         }

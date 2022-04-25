@@ -46,8 +46,8 @@ public class InputManager : MonoBehaviour
             if(hit.collider != null)
             {
                 Debug.Log(hit.collider.gameObject.name);
-                selectedObject = hit.collider.gameObject;
-                attackingPlanets.Add(selectedObject);
+                //selectedObject = hit.collider.gameObject;
+                //attackingPlanets.Add(selectedObject);
                 //selectedObject.GetComponent<CircleCollider2D>().enabled = false;
                 //originPos = selectedObject.transform.position;
                 isDragging = true;
@@ -106,14 +106,15 @@ public class InputManager : MonoBehaviour
             //lr.SetPosition(0, new Vector3(0, 0, 0));
             //lr.SetPosition(1, new Vector3(0,0,0));
             isDragging = false;
-            if (selectedObject != null)
+            if (selectedObject2 != null)
             {
                 //selectedObject.transform.position = originPos;
                 //selectedObject.GetComponent<CircleCollider2D>().enabled = true;
-                if(selectedObject != null && targetLocation != null)
+                if(selectedObject2 != null && targetLocation != null)
                 {
                     if (attackingPlanets != null)
                     {
+                        Debug.Log("is able to attack");
                         for (int i = 0; i < attackingPlanets.Count; i++)
                         {
                             if(attackingPlanets[i].tag == "Carrier")
@@ -122,6 +123,7 @@ public class InputManager : MonoBehaviour
                             }
                             else
                             {
+                                Debug.Log(attackingPlanets[i].GetComponent<GameObject>());
                                 Attack(attackingPlanets[i].GetComponent<Building>(), targetLocation);
                             }
                         }

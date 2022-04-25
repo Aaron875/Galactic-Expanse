@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f49276f83012d8b4d8dccc38d5a638c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overlayPrefab: {fileID: 1621632330869324283, guid: dafef482276ecf54fb5cfb09bc199e4b, type: 3}
+  overlayPrefab: {fileID: 1621632330869324283, guid: 958fa5b2b24b94646b8560e38d974c0a, type: 3}
   openClose: 0
   lvlName: Level_3
 --- !u!61 &602470769
@@ -1101,7 +1101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f49276f83012d8b4d8dccc38d5a638c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overlayPrefab: {fileID: 3325724625476654869, guid: e926fa0d8b8983a489e596c80c4041b4, type: 3}
+  overlayPrefab: {fileID: 3325724625476654869, guid: dafef482276ecf54fb5cfb09bc199e4b, type: 3}
   openClose: 0
   lvlName: Level_2
 --- !u!61 &1719011196

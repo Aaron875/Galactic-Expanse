@@ -13,7 +13,7 @@ public class InputManager : MonoBehaviour
     public LayerMask draggableMask;
     public LayerMask hittableMask;
     [SerializeField] GameObject selectedObject;
-    [SerializeField] GameObject selectedObject2; // this is the building to be returned as the target
+    [SerializeField] GameObject selectedObject2;
     bool isDragging;
     Vector3 pos;
     Vector3 originPos;
@@ -25,11 +25,7 @@ public class InputManager : MonoBehaviour
 
     void Start()
     {
-        //squadManager = GetComponent<SquadManager>();
-        //gameManager = GetComponent<GameManager>();
         isDragging = false;
-        lr = GetComponent<LineRenderer>();
-        lr.positionCount = 2;
     }
     void Update()
     {
@@ -43,35 +39,25 @@ public class InputManager : MonoBehaviour
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, draggableMask);
+
+            // if the user clicks and a valid planet is clicked on
             if(hit.collider != null)
             {
-                Debug.Log(hit.collider.gameObject.name);
-                //selectedObject = hit.collider.gameObject;
-                //attackingPlanets.Add(selectedObject);
-                //selectedObject.GetComponent<CircleCollider2D>().enabled = false;
-                //originPos = selectedObject.transform.position;
+                // saves the clicked planet and it's position as the origin for attacks
+                selectedObject = hit.collider.gameObject;
+                originPos = selectedObject.transform.position;
                 isDragging = true;
-
-/*                if(selectedObject.tag == "Carrier")
-                {
-                    startLocation = selectedObject.GetComponent<Squad>();
-                }
-                else
-                {
-                    startLocation = selectedObject.GetComponent<Building>();
-
-                }*/
-
-                //lr.SetPosition(0, originPos);
             }
         }
 
+        // if the user is dragging...
         if (isDragging)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D select = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, draggableMask);
             if (select.collider != null)
             {
+                // if the current planet has not been added to the attacking planets list, do it
                 if (attackingPlanets.Count < 1)
                 {
                     attackingPlanets.Add(select.collider.gameObject);
@@ -89,9 +75,11 @@ public class InputManager : MonoBehaviour
                     }
                 }
             }
-            pos = mousePos();
-            //lr.SetPosition(1, pos);
 
+            // saves the position of the mouse for line renderer purposes
+            pos = mousePos();
+
+            // loop for drawing lines from each attacking planet to the mouse cursor
             for (int i = 0; i < attackingPlanets.Count; i++)
             {
                 attackingPlanets[i].GetComponent<LineRenderer>().enabled = true;
@@ -101,57 +89,45 @@ public class InputManager : MonoBehaviour
             }
         }
 
+        // When the mouse button is released, send attacks
         if (Input.GetMouseButtonUp(0))
         {
-            //lr.SetPosition(0, new Vector3(0, 0, 0));
-            //lr.SetPosition(1, new Vector3(0,0,0));
             isDragging = false;
             if (selectedObject2 != null)
             {
-                //selectedObject.transform.position = originPos;
-                //selectedObject.GetComponent<CircleCollider2D>().enabled = true;
                 if(selectedObject2 != null && targetLocation != null)
                 {
                     if (attackingPlanets != null)
                     {
-                        Debug.Log("is able to attack");
+                        // Loop for sending attacks from each planet accordingly
                         for (int i = 0; i < attackingPlanets.Count; i++)
                         {
-                            if(attackingPlanets[i].tag == "Carrier")
-                            {
-                                Attack(attackingPlanets[i].GetComponent<Squad>(), targetLocation);
-                            }
-                            else
-                            {
-                                Debug.Log(attackingPlanets[i].GetComponent<GameObject>());
-                                Attack(attackingPlanets[i].GetComponent<Building>(), targetLocation);
-                            }
+                            Attack(attackingPlanets[i].GetComponent<Building>(), targetLocation);
                         }
-                    }
-
-                    if(selectedObject.gameObject.tag == "Carrier")
-                    {
-                        Attack(selectedObject.GetComponent<Squad>(), targetLocation);
-                    }
-                    else
-                    {
-                        Attack(selectedObject.GetComponent<Building>(), targetLocation);
                     }
 
                     selectedObject = null;
                     targetLocation = null;
                 }
             }
+
+            // This loop is necessary so the lines for targeting don't stay on the screen in between sent attacks
             for (int i = 0; i < attackingPlanets.Count; i++)
             {
                 attackingPlanets[i].GetComponent<LineRenderer>().enabled = false;
             }
+
+            // clears the attacking planets list
             attackingPlanets.Clear();
         }
 
         HitDetection();
     }
 
+    /// <summary>
+    /// Grabs mouse position on the screen, and converts its coordinates for use elsewhere
+    /// </summary>
+    /// <returns></returns>
     Vector3 mousePos()
     {
         return Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
@@ -200,28 +176,36 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private void Attack(Squad _carrier, Building _targetLocation)
-    {
-        Debug.Log("Attacking from carrier...");
-        if(_carrier.NumUnits % 2 == 0)
-        {
-            _carrier.NumUnits = _carrier.NumUnits / 2;
-            squadManager.CreateSquad(_carrier.NumUnits, _carrier, _targetLocation);
-        }
-        else
-        {
-            _carrier.NumUnits = _carrier.NumUnits / 2;
-            squadManager.CreateSquad(_carrier.NumUnits, _carrier, _targetLocation);
-            _carrier.NumUnits++;
-        }
-    }
+    // WHOEVER MADE THIS I COMMENTED IT OUT FOR NOW, IN CASE IT IS NECESSARY LATER
+    //private void Attack(Squad _carrier, Building _targetLocation)
+    //{
+    //    Debug.Log("Attacking from carrier...");
+    //    if(_carrier.NumUnits % 2 == 0)
+    //    {
+    //        _carrier.NumUnits = _carrier.NumUnits / 2;
+    //        squadManager.CreateSquad(_carrier.NumUnits, _carrier, _targetLocation);
+    //    }
+    //    else
+    //    {
+    //        _carrier.NumUnits = _carrier.NumUnits / 2;
+    //        squadManager.CreateSquad(_carrier.NumUnits, _carrier, _targetLocation);
+    //        _carrier.NumUnits++;
+    //    }
+    //}
 
+    /// <summary>
+    /// Sets position count for lines drawn 
+    /// </summary>
+    /// <param name="points"></param>
     public void SetUpLine(Transform[] points)
     {
         lr.positionCount = points.Length;
         this.points = points;
     }
 
+    /// <summary>
+    /// Handles changing the speed of the game
+    /// </summary>
     private void UpdateTimeMultiplier()
     {
         if(Input.GetKeyDown(KeyCode.Space))

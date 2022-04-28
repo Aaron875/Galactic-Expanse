@@ -76,9 +76,10 @@ public class InputManager : MonoBehaviour
                 }
             }
 
+            // Loops through list of attacking planets, and if the planet changes 
             for (int i = 0; i < attackingPlanets.Count; i++)
             {
-                if (attackingPlanets[i].GetComponent<Building>().Alignment == "E")
+                if (attackingPlanets[i].GetComponent<Building>().Alignment != "P")
                 {
                     attackingPlanets[i].GetComponent<LineRenderer>().enabled = false;
                     attackingPlanets.RemoveAt(i);

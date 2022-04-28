@@ -96,22 +96,22 @@ public class TimeControlButtons : MonoBehaviour
         {
             case 0:
                 pauseTransform.localScale = normalScale;
-                pauseImage.color = new Color(0, 105, 255);
+                pauseImage.color = new Color(0, 0.41f, 1);
                 break;
 
             case 1:
                 playTransform.localScale = normalScale;
-                playImage.color = new Color(0, 105, 255);
+                playImage.color = new Color(0, 0.41f, 1);
                 break;
 
             case 2:
                 twoTimesTransform.localScale = normalScale;
-                twoTimesImage.color = new Color(0, 105, 255);
+                twoTimesImage.color = new Color(0, 0.41f, 1);
                 break;
 
             case 3:
                 threeTimesTransform.localScale = normalScale;
-                threeTimesImage.color = new Color(0, 105, 255);
+                threeTimesImage.color = new Color(0, 0.41f, 1);
                 break;
         }
 

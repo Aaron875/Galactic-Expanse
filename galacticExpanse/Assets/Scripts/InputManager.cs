@@ -76,6 +76,15 @@ public class InputManager : MonoBehaviour
                 }
             }
 
+            for (int i = 0; i < attackingPlanets.Count; i++)
+            {
+                if (attackingPlanets[i].GetComponent<Building>().Alignment == "E")
+                {
+                    attackingPlanets[i].GetComponent<LineRenderer>().enabled = false;
+                    attackingPlanets.RemoveAt(i);
+                }
+            }
+
             // saves the position of the mouse for line renderer purposes
             pos = mousePos();
 

@@ -47,28 +47,71 @@ public class EnemyManager : MonoBehaviour
                         int potentialTarget;
                         float potentialScore;
 
-                        for (int j = 0; j < buildings.Count; j++)
+                        if (buildings[i].Type != "Turret")
                         {
-                            potentialTarget = j;
-                            potentialScore = buildings[j].Attackability;
-
-                            //If target is self then it will never attack itself
-                            if (j == i)
+                            for (int j = 0; j < buildings.Count; j++)
                             {
-                                potentialScore = -1000;
-                            }
-                            else
-                            {
+                                potentialTarget = j;
+                                potentialScore = buildings[j].Attackability;
 
-                                //Takes planet regening troops into account
-                                if(buildings[j].Alignment != "N" && buildings[j].NumUnits < 50)
+                                //If target is self then it will never attack itself
+                                if (j == i)
+                                {
+                                    potentialScore = -1000;
+                                }
+                                else
                                 {
 
-                                    //If interceptor time it takes to get somewhere is halved so their score is as well
-                                    if (buildings[i].Type == "Interceptor")
+                                    //Takes planet regening troops into account
+                                    if (buildings[j].Alignment != "N" && buildings[j].NumUnits < 50)
                                     {
-                                        potentialScore -= 2 * (buildings[i].Distances[j] / 60);
+
+                                        //If interceptor time it takes to get somewhere is halved so their score is as well
+                                        if (buildings[i].Type == "Interceptor")
+                                        {
+                                            potentialScore -= 2 * (buildings[i].Distances[j] / 60);
+                                        }
+
+                                        potentialScore -= 2 * (buildings[i].Distances[j] / 30);
                                     }
+
+                                    //Can kill so drastically increases score
+                                    if (potentialScore >= buildings[i].NumUnits / 2 && buildings[j].Alignment != "E")
+                                    {
+                                        potentialScore += 500;
+                                    }
+
+                                    //Farther planets have lower score
+                                    //Distance is bigger than I anticipated, divided by 10 to reduce that
+                                    potentialScore -= (buildings[i].Distances[j] / 12);
+
+                                    //Just some randomness so the AI isn't 100% predictable
+                                    potentialScore += Random.Range(0, 80);
+
+                                }
+
+
+                                if (potentialScore > targetScore)
+                                {
+                                    currentTarget = potentialTarget;
+                                    targetScore = potentialScore;
+                                }
+
+                            }
+
+                            Attack(i, currentTarget);
+
+                        }
+                        else
+                        {
+                            for (int j = 0; j < buildings.Count; j++)
+                            {
+                                potentialTarget = j;
+                                potentialScore = buildings[j].Attackability;
+
+                                //Takes planet regening troops into account
+                                if (buildings[j].Alignment != "N" && buildings[j].NumUnits < 50)
+                                {
 
                                     potentialScore -= 2 * (buildings[i].Distances[j] / 30);
                                 }
@@ -76,29 +119,13 @@ public class EnemyManager : MonoBehaviour
                                 //Can kill so drastically increases score
                                 if (potentialScore >= buildings[i].NumUnits / 2 && buildings[j].Alignment != "E")
                                 {
-                                    potentialScore += 500;
+                                    Attack(i, potentialTarget);
                                 }
 
-                                //Farther planets have lower score
-                                //Distance is bigger than I anticipated, divided by 10 to reduce that
-                                potentialScore -= (buildings[i].Distances[j] / 12);
-
-                                //Just some randomness so the AI isn't 100% predictable
-                                potentialScore += Random.Range(0, 80);
-
                             }
-
-
-                            if (potentialScore > targetScore)
-                            {
-                                currentTarget = potentialTarget;
-                                targetScore = potentialScore;
-                            }
-
                         }
 
 
-                        Attack(i, currentTarget);
 
                     }
                 }
